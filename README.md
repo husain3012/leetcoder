@@ -29,11 +29,11 @@ yarn dev
 ### Local
 
 ```bash
-http://localhost:3000/leetcode/username
+http://localhost:3000/api/leetcode/username
 ```
 
 ### Deployed
 ```bash
-https://leetcode-api.vercel.app/leetcode/username
+https://leetcoder.vercel.app/api/leetcode/username
 ```
 
