@@ -1,12 +1,13 @@
-name: Trigger Update Queue
+name: Update Leetcoder Queue
+
 on:
   schedule:
+    # Runs every 9th minute
     - cron: '*/11 * * * *'
+
 jobs:
-  build:
-    name: Trigger Update
+  update-queue:
     runs-on: ubuntu-latest
     steps:
-      - name: cURL request
-        # Hit the webhook endpoint to rebuild  from the "main" branch
+      - name: Hit the API URL
         run: curl -X POST -d {} https://leetcoder.vercel.app/api/update/queue?limit=3&age=3600
