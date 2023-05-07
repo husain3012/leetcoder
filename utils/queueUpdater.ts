@@ -1,7 +1,11 @@
 import db from "../db";
 import dayjs from "dayjs";
 import { getLeetcodeStatsToSave, leetcodeStats } from "./leetcode";
-export const updateQueue = async (limit: number, age: number) => {
+export const updateQueue = async (
+  limit: number,
+  age: number,
+  timeout: number = 0
+) => {
   let updatedUsers = [];
   try {
     const usersToUpdate = await db.user.findMany({
@@ -51,6 +55,7 @@ export const updateQueue = async (limit: number, age: number) => {
         username: user.leetcodeUsername,
         success: leetcodeStatsData.length != 0,
       });
+      await new Promise((resolve) => setTimeout(resolve, timeout));
     }
   } catch (error) {
     console.log(error);
