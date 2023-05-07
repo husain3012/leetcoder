@@ -4,3 +4,4 @@ interface IUser {
     leetcodeUsername?:string
     codecheffUsername?:string
   }
+  export default IUser

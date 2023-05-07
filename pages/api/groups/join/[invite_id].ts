@@ -2,6 +2,7 @@ import { nanoid } from "nanoid";
 import { ApiError } from "next/dist/server/api-utils";
 import db from "../../../../db";
 import type { NextApiRequest, NextApiResponse } from "next";
+import IUser from "../../../../@types/user";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   switch (req.method) {
@@ -17,7 +18,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 };
 
 const postHandler = async (req: NextApiRequest, res: NextApiResponse) => {
-  const { email, name, leetcodeUsername, codecheffUsername }: IUser = req.body;
+  const { email, name, leetcodeUsername }: IUser = req.body;
   const inviteID = (req.query.invite_id as string) || "";
 
   try {
