@@ -4,3 +4,4 @@ interface IGroup {
     coverPhoto?:string 
     createdByEmail : string
   }
+export default IGroup
