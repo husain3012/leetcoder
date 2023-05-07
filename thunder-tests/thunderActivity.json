@@ -1,0 +1,21 @@
+[
+  {
+    "_id": "43309621-6a6e-4c7f-aadd-81385056b8db",
+    "colId": "history",
+    "containerId": "",
+    "name": "http://localhost:3000/api/create",
+    "url": "http://localhost:3000/api/create",
+    "method": "POST",
+    "sortNum": 0,
+    "created": "2023-05-03T21:36:47.224Z",
+    "modified": "2023-05-05T09:58:54.344Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"name\":\"sgo242\",\n  \"description\": \"A test group\",\n  \"createdByEmail\" :\"husainshahidrao@gmail.com\"\n}",
+      "form": []
+    },
+    "tests": []
+  }
+]

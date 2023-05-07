@@ -1,3 +1,5 @@
+import ILeetcodeUser from "../@types/leetcode_user";
+
 const start = '<script id="__NEXT_DATA__" type="application/json">';
 const end = "</script>";
 
@@ -23,4 +25,17 @@ export const parseHTML = (html_string) => {
       error,
     };
   }
+};
+
+export const leetcodeify_user = (user: any[], exclude: string[]) => {
+  let transformed_user = {};
+  for (let props of user) {
+    for (let key of Object.keys(props)) {
+      if (!exclude.includes(key)) {
+        transformed_user[key] = props[key];
+      }
+    }
+  }
+
+  return transformed_user as ILeetcodeUser;
 };
