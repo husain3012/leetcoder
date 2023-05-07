@@ -82,11 +82,11 @@
     "colId": "eb7f48da-d90d-44cf-928b-88cf15c458ec",
     "containerId": "",
     "name": "Group Stats",
-    "url": "{{host}}/api/groups/status/10",
+    "url": "{{host}}/api/groups/status/3",
     "method": "GET",
     "sortNum": 10000,
     "created": "2023-05-05T12:30:43.528Z",
-    "modified": "2023-05-07T22:17:20.285Z",
+    "modified": "2023-05-07T22:44:53.313Z",
     "headers": [],
     "params": [],
     "tests": []
