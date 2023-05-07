@@ -4,11 +4,11 @@
     "colId": "afd111b2-fc41-4594-8680-223aa29d6ceb",
     "containerId": "",
     "name": "Create Group",
-    "url": "http://localhost:3000/api/groups/create",
+    "url": "{{host}}/api/groups/create",
     "method": "POST",
     "sortNum": 10000,
     "created": "2023-05-05T11:04:20.299Z",
-    "modified": "2023-05-05T11:22:45.715Z",
+    "modified": "2023-05-07T22:18:12.441Z",
     "headers": [],
     "params": [],
     "body": {
@@ -23,11 +23,11 @@
     "colId": "afd111b2-fc41-4594-8680-223aa29d6ceb",
     "containerId": "",
     "name": "Join User",
-    "url": "http://localhost:3000/api/groups/join/T0PmK2F8fo",
+    "url": "{{host}}/api/groups/join/T0PmK2F8fo",
     "method": "POST",
     "sortNum": 20000,
     "created": "2023-05-05T11:04:29.409Z",
-    "modified": "2023-05-05T13:29:44.800Z",
+    "modified": "2023-05-07T22:18:06.212Z",
     "headers": [],
     "params": [],
     "body": {
@@ -42,11 +42,11 @@
     "colId": "afd111b2-fc41-4594-8680-223aa29d6ceb",
     "containerId": "",
     "name": "Search Groups",
-    "url": "http://localhost:3000/api/groups/search?name",
+    "url": "{{host}}/api/groups/search?name",
     "method": "GET",
     "sortNum": 30000,
     "created": "2023-05-05T11:17:17.680Z",
-    "modified": "2023-05-07T17:51:30.895Z",
+    "modified": "2023-05-07T22:17:56.809Z",
     "headers": [],
     "params": [
       {
@@ -62,11 +62,11 @@
     "colId": "a7de6250-7640-482b-a62f-8911bb4e7a5a",
     "containerId": "",
     "name": "Leetcode Info",
-    "url": "http://localhost:3000/api/leetcode?user=husain3012",
+    "url": "{{host}}/api/leetcode?user=husain3012",
     "method": "GET",
     "sortNum": 10000,
     "created": "2023-05-05T11:59:05.854Z",
-    "modified": "2023-05-05T12:00:53.003Z",
+    "modified": "2023-05-07T22:17:43.001Z",
     "headers": [],
     "params": [
       {
@@ -82,11 +82,11 @@
     "colId": "eb7f48da-d90d-44cf-928b-88cf15c458ec",
     "containerId": "",
     "name": "Group Stats",
-    "url": "http://localhost:3000/api/groups/status/10",
+    "url": "{{host}}/api/groups/status/10",
     "method": "GET",
     "sortNum": 10000,
     "created": "2023-05-05T12:30:43.528Z",
-    "modified": "2023-05-07T21:15:48.543Z",
+    "modified": "2023-05-07T22:17:20.285Z",
     "headers": [],
     "params": [],
     "tests": []
@@ -96,16 +96,16 @@
     "colId": "4b21f778-f964-46fb-ae23-b83cb406b1af",
     "containerId": "",
     "name": "Update users",
-    "url": "http://localhost:3000/api/update/queue?limit=10&age=1000",
+    "url": "{{host}}/api/update/queue?limit=3&age=1000",
     "method": "GET",
     "sortNum": 10000,
     "created": "2023-05-07T20:23:28.294Z",
-    "modified": "2023-05-07T21:53:15.570Z",
+    "modified": "2023-05-07T22:17:36.004Z",
     "headers": [],
     "params": [
       {
         "name": "limit",
-        "value": "10",
+        "value": "3",
         "isPath": false
       },
       {
@@ -121,11 +121,11 @@
     "colId": "4b21f778-f964-46fb-ae23-b83cb406b1af",
     "containerId": "",
     "name": "Update users by username",
-    "url": "http://localhost:3000/api/update/user?username=husain3012",
+    "url": "{{host}}/api/update/user?username=husain3012",
     "method": "GET",
     "sortNum": 20000,
     "created": "2023-05-07T22:00:00.616Z",
-    "modified": "2023-05-07T22:00:31.558Z",
+    "modified": "2023-05-07T22:16:29.922Z",
     "headers": [],
     "params": [
       {

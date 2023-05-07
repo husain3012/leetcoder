@@ -1,1 +1,16 @@
-[]
+[
+  {
+    "_id": "2ab141c8-af08-4b28-bbf3-3004950d048d",
+    "name": "host",
+    "default": true,
+    "sortNum": 10000,
+    "created": "2023-05-07T22:15:32.912Z",
+    "modified": "2023-05-07T22:15:32.912Z",
+    "data": [
+      {
+        "name": "host",
+        "value": "https://leetcoder.vercel.app"
+      }
+    ]
+  }
+]
