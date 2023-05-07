@@ -1,8 +1,6 @@
 name: Trigger Update Queue
-
 on:
   schedule:
-
     - cron: '*/11 * * * *'
 jobs:
   build:
