@@ -21,7 +21,7 @@ model User {
   leetcodeStats    LeetcodeInfo?
   lastAccessed     DateTime
   lastUpdated      DateTime
-  failedRetries    Int
+  failedRetries    Int           @default(0)
 }
 
 model Group {
