@@ -9,7 +9,7 @@
     "data": [
       {
         "name": "host",
-        "value": "https://leetcoder.vercel.app"
+        "value": "http://localhost:3000"
       }
     ]
   }

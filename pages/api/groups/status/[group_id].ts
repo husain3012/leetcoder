@@ -41,8 +41,15 @@ const getHandler = async (req: NextApiRequest, res: NextApiResponse) => {
             lastAccessed:true,
             leetcodeStats: true
           },
+          orderBy:{
+            leetcodeStats:{
+              ranking: "asc"
+            }
+          }
         },
+        
       },
+      
     });
   
 

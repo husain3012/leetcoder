@@ -23,16 +23,16 @@
     "colId": "afd111b2-fc41-4594-8680-223aa29d6ceb",
     "containerId": "",
     "name": "Join User",
-    "url": "{{host}}/api/groups/join/T0PmK2F8fo",
+    "url": "{{host}}/api/groups/join/123_group1",
     "method": "POST",
     "sortNum": 20000,
     "created": "2023-05-05T11:04:29.409Z",
-    "modified": "2023-05-07T22:18:06.212Z",
+    "modified": "2023-05-08T18:22:13.780Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"name\":\"farhan\",\n  \"leetcodeUsername\": \"farhan\",\n  \"email\" :\"farhan@gmail.com\"\n}",
+      "raw": "{\n  \"name\":\"abhiyasdsadadav05\",\n  \"leetcodeUsername\": \"abhiyadaksajhdlksjahdlkhfsiudfv05\",\n  \"email\" :\"abhiyaasdjsakddav05@gmail.com\"\n}",
       "form": []
     },
     "tests": []
@@ -42,11 +42,11 @@
     "colId": "afd111b2-fc41-4594-8680-223aa29d6ceb",
     "containerId": "",
     "name": "Search Groups",
-    "url": "{{host}}/api/groups/search?name",
+    "url": "{{host}}/api/groups/search?name=",
     "method": "GET",
     "sortNum": 30000,
     "created": "2023-05-05T11:17:17.680Z",
-    "modified": "2023-05-07T22:17:56.809Z",
+    "modified": "2023-05-08T18:12:27.907Z",
     "headers": [],
     "params": [
       {
@@ -82,11 +82,11 @@
     "colId": "eb7f48da-d90d-44cf-928b-88cf15c458ec",
     "containerId": "",
     "name": "Group Stats",
-    "url": "{{host}}/api/groups/status/3",
+    "url": "{{host}}/api/groups/status/1",
     "method": "GET",
     "sortNum": 10000,
     "created": "2023-05-05T12:30:43.528Z",
-    "modified": "2023-05-07T22:44:53.313Z",
+    "modified": "2023-05-08T18:17:23.962Z",
     "headers": [],
     "params": [],
     "tests": []
