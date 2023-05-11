@@ -92,7 +92,7 @@ const JoinGroup = () => {
         <Input type="email" />
       </Form.Item>
 
-      <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+      <Form.Item >
         <Button
           disabled={joiningGroup}
           loading={joiningGroup}

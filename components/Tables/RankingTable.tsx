@@ -55,8 +55,8 @@ const columns: ColumnsType<IGroupMember> = [
     width: "10%",
   },
   {
-    title: "Current Streak",
-    dataIndex: "currentStreak",
+    title: "Max Streak",
+    dataIndex: "maxStreak",
     sorter: (a, b) => a.leetcodeStats?.streak - b.leetcodeStats?.streak,
     render: (_, r) =>
       r.leetcodeStats ? r.leetcodeStats?.streak : <QuestionOutlined />,

@@ -62,16 +62,16 @@
     "colId": "a7de6250-7640-482b-a62f-8911bb4e7a5a",
     "containerId": "",
     "name": "Leetcode Info",
-    "url": "{{host}}/api/leetcode?user=husain3012",
+    "url": "{{host}}/api/leetcode?user=sparsh_mahajan",
     "method": "GET",
     "sortNum": 10000,
     "created": "2023-05-05T11:59:05.854Z",
-    "modified": "2023-05-07T22:17:43.001Z",
+    "modified": "2023-05-11T20:19:22.130Z",
     "headers": [],
     "params": [
       {
         "name": "user",
-        "value": "husain3012",
+        "value": "sparsh_mahajan",
         "isPath": false
       }
     ],
