@@ -5,6 +5,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { ApiError } from "next/dist/server/api-utils";
 
 import RequestError from "../../../../errors";
+import { getGroupStatus } from "../../../../services/groups/status";
 
 
 
@@ -28,29 +29,7 @@ const getHandler = async (req: NextApiRequest, res: NextApiResponse) => {
     const group_id = Number(req.query.group_id);
 
 
-    const group = await db.group.findUnique({
-      where: {
-        id: group_id,
-      },
-      include: {
-        members: {
-          select: {
-            name: true,
-            leetcodeUsername: true,
-            lastUpdated:true,
-            lastAccessed:true,
-            leetcodeStats: true
-          },
-          orderBy:{
-            leetcodeStats:{
-              ranking: "asc"
-            }
-          }
-        },
-        
-      },
-      
-    });
+    const group = await getGroupStatus(group_id);
   
 
   

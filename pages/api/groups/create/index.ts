@@ -3,6 +3,7 @@ import db from "../../../../db";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { ApiError } from "next/dist/server/api-utils";
 import IGroup from "../../../../@types/group";
+import SITE_CONFIG from "../../../../site_config";
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   switch (req.method) {
     case "POST":
@@ -36,7 +37,7 @@ const postHandler = async (req: NextApiRequest, res: NextApiResponse) => {
       data: {
         name,
         description,
-        coverPhoto,
+        coverPhoto: coverPhoto || SITE_CONFIG.defaultCoverPhotos[Math.floor(Math.random()*SITE_CONFIG.defaultCoverPhotos.length)],
         createdByEmail,
         inviteID: nanoid(10),
       },

@@ -1,7 +1,25 @@
 interface IGroup {
-    name:string
-    description?:string
-    coverPhoto?:string 
-    createdByEmail : string
-  }
-export default IGroup
+  id?: number;
+  name: string;
+  description?: string;
+  coverPhoto?: string;
+  createdByEmail: string;
+  members?: IGroupMember[];
+  inviteID?: string;
+}
+export default IGroup;
+
+export interface IGroupMember {
+  id: string;
+  name: string;
+  leetcodeUsername: string;
+  lastAccessed: Date;
+  lastUpdated: Date;
+  leetcodeStats: {
+    ranking: number;
+    streak: number;
+    easySolved: number;
+    mediumSolved: number;
+    hardSolved: number;
+  } | null;
+}

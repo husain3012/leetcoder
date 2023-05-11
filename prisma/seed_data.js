@@ -29,8 +29,8 @@ const users = usernames.map((username, idx) => ({
   email: username + "@" + "gmail.com",
   name: idx + "_" + username,
   leetcodeUsername: username,
-  lastAccessed: new Date(0),
-  lastUpdated: new Date(0),
+  lastAccessed: new Date(),
+  lastUpdated: new Date(),
 }));
 
 const groups = [

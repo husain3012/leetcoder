@@ -23,16 +23,16 @@
     "colId": "afd111b2-fc41-4594-8680-223aa29d6ceb",
     "containerId": "",
     "name": "Join User",
-    "url": "{{host}}/api/groups/join/123_group1",
+    "url": "{{host}}/api/groups/join/1tbxJ1GDh7",
     "method": "POST",
     "sortNum": 20000,
     "created": "2023-05-05T11:04:29.409Z",
-    "modified": "2023-05-08T18:22:13.780Z",
+    "modified": "2023-05-11T18:40:45.771Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"name\":\"abhiyasdsadadav05\",\n  \"leetcodeUsername\": \"abhiyadaksajhdlksjahdlkhfsiudfv05\",\n  \"email\" :\"abhiyaasdjsakddav05@gmail.com\"\n}",
+      "raw": "{\n  \"name\":\"abhiyasdsadadav05\",\n  \"leetcodeUsername\": \"husain3012\",\n  \"email\" :\"hsr3012kalimg@gmail.com\"\n}",
       "form": []
     },
     "tests": []
@@ -121,16 +121,16 @@
     "colId": "4b21f778-f964-46fb-ae23-b83cb406b1af",
     "containerId": "",
     "name": "Update users by username",
-    "url": "{{host}}/api/update/user?username=husain3012",
+    "url": "{{host}}/api/update/user?username=sparsh_mahajan",
     "method": "GET",
     "sortNum": 20000,
     "created": "2023-05-07T22:00:00.616Z",
-    "modified": "2023-05-07T22:16:29.922Z",
+    "modified": "2023-05-11T16:21:36.732Z",
     "headers": [],
     "params": [
       {
         "name": "username",
-        "value": "husain3012",
+        "value": "sparsh_mahajan",
         "isPath": false
       }
     ],

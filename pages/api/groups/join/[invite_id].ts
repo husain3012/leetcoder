@@ -33,7 +33,7 @@ const postHandler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     const userToJoin = await db.user.upsert({
       where:{
-        email
+        leetcodeUsername
       },
       create:{
         email,
