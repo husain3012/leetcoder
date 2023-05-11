@@ -1,4 +1,4 @@
-import { Avatar, List } from "antd";
+import { Avatar, Button, List } from "antd";
 import React from "react";
 import IGroup from "../../@types/group";
 import Link from "next/link";
@@ -10,7 +10,7 @@ const GroupList = ({ groupList }: { groupList: IGroup[] }) => {
         itemLayout="horizontal"
         dataSource={groupList}
         renderItem={(item, index) => (
-          <List.Item extra={<Link target="_blank" rel="noreferrer" href={`/groups/${item.id}`}>Show</Link>}>
+          <List.Item extra={<Button type="dashed" ><Link target="_blank" rel="noreferrer" href={`/groups/${item.id}`}>Show</Link></Button>}>
             <List.Item.Meta
               avatar={<Avatar src={item.coverPhoto} />}
               title={item.name}
