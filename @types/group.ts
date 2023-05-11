@@ -6,6 +6,9 @@ interface IGroup {
   createdByEmail: string;
   members?: IGroupMember[];
   inviteID?: string;
+  _count?:{
+    members: number;
+  }
 }
 export default IGroup;
 
