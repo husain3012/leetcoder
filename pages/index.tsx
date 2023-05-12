@@ -13,6 +13,8 @@ import {
   Space,
   message,
   Avatar,
+  Spin,
+  Button,
 } from "antd";
 import JoinGroup from "../components/JoinGroup";
 import IGroup, { IGroupMember } from "../@types/group";
@@ -20,10 +22,11 @@ import GroupList from "../components/GroupList";
 import axios from "axios";
 import {
   loadUserFromLocal,
+  removeUserFromLocal,
   saveUserToLocal,
 } from "../utils/localstorageManager";
 import SITE_CONFIG from "../site_config";
-import { EyeFilled, UserOutlined } from "@ant-design/icons";
+import { EyeFilled, LinkOutlined, Loading3QuartersOutlined, LoadingOutlined, LogoutOutlined, UserOutlined } from "@ant-design/icons";
 
 const { Search } = Input;
 const { Text, Title } = Typography;
@@ -34,6 +37,7 @@ export default function Index() {
   const [searchString, setSearchString] = useState("");
   const [searchResult, setSearchResult] = useState<IGroup[]>([]);
   const [searchLoading, setSearchLoading] = useState(false);
+  const [savedUserLoading, setSavedUserLoading] = useState(false);
 
   const [savedUser, setSavedUser] = useState<IGroupMember | null>(null);
 
@@ -52,21 +56,32 @@ export default function Index() {
 
   useEffect(() => {
     const loadUser = async () => {
-      const user = await loadUserFromLocal();
-      if (user == null) return;
-      setSavedUser(user);
+      setSavedUserLoading(true);
+      try {
+        const user = await loadUserFromLocal();
+        if (user == null) {
+          setSavedUserLoading(false);
+          return;
+        }
+        setSavedUser(user);
+      } catch (error) {
+        message.error(error.message);
+      }
+
+      setSavedUserLoading(false);
     };
     loadUser();
   }, []);
 
   return (
     <div>
-      {savedUser ? (
-        <SavedUserInfo user={savedUser} />
-      ) : (
-        <LandingHero setSavedUser={setSavedUser} />
-      )}
-
+      <Spin spinning={savedUserLoading} size="large" indicator={<LoadingOutlined/>}>
+        {savedUser ? (
+          <SavedUserInfo savedUser={savedUser} setSavedUser={setSavedUser} />
+        ) : (
+          <LandingHero setSavedUser={setSavedUser} />
+        )}
+      </Spin>
       <Divider>OR</Divider>
 
       <div
@@ -166,53 +181,79 @@ const LandingHero = ({ setSavedUser }: { setSavedUser: any }) => {
   );
 };
 
-const SavedUserInfo = ({ user }: { user: IGroupMember }) => {
+const SavedUserInfo = ({
+  savedUser,
+  setSavedUser,
+}: {
+  savedUser: IGroupMember;
+  setSavedUser: any;
+}) => {
   const { token } = theme.useToken();
+  const logoutHandler = () => {
+    removeUserFromLocal();
+    setSavedUser(null);
+  };
 
   return (
     <div style={{ margin: "2em auto" }}>
-      <Title >
-        <span style={{ color: token.colorWhite }}>Hey </span>
-        <span>
-          <span style={{ color: token.colorPrimary }}>
-            {user.name.split(" ")[0]}
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+        }}
+      >
+        <Title>
+          <span>
+            <span style={{ color: token.colorWhite }}>Hey </span>
+            <span>
+              <span style={{ color: token.colorPrimary }}>
+                {savedUser.name.split(" ")[0]}
+              </span>
+              <span style={{ color: token.colorWhite }}>!</span>
+            </span>
           </span>
-          <span style={{ color: token.colorWhite }}>!</span>
-        </span>
-      </Title>
+        </Title>
+
+        <Button
+          shape="round"
+          icon={<LogoutOutlined />}
+          type="primary"
+          onClick={logoutHandler}
+        >
+          Logout
+        </Button>
+      </div>
+
       <Title level={3}>Groups You have joined -</Title>
       <div
         style={{
           display: "flex",
           flexWrap: "wrap",
-          // justifyContent: "space-evenly",
-          
+          justifyContent: "center",
+
           gap: 4,
         }}
       >
-        {user.groups.map((group) => (
+        {savedUser.groups.map((group) => (
           <Card
+            key={group.id}
             style={{ width: 256 }}
             cover={<img alt="cover photo" src={group.coverPhoto} />}
             actions={[
               <Link href={`/groups/${group.id}`}>
-                <EyeFilled />
+                <LinkOutlined />
               </Link>,
-               <Space >
-               <UserOutlined />
-               {group._count.members}
-             </Space>,
+              <Space>
+                <UserOutlined />
+                {group._count.members}
+              </Space>,
             ]}
           >
             <Meta
               avatar={<Avatar src={SITE_CONFIG.leetcode_logo} />}
               title={`${group.name}`}
               description={
-                <Typography.Paragraph>
-                  {group.description}
-                
-                
-                </Typography.Paragraph>
+                <Typography.Paragraph>{group.description}</Typography.Paragraph>
               }
             />
           </Card>

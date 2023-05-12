@@ -12,7 +12,11 @@ export const saveUserToLocal = (leetcodeUsername: string) => {
 export const loadUserFromLocal = async (): Promise<IGroupMember | null> => {
   const leetcodeUsername = localStorage.getItem("user");
   if (!leetcodeUsername) return null;
-  return (await axios.get(
-    `/api/groups/user?leetcodeUsername=${leetcodeUsername}`
-  )).data;
+  return (
+    await axios.get(`/api/groups/user?leetcodeUsername=${leetcodeUsername}`)
+  ).data;
+};
+
+export const removeUserFromLocal = () => {
+  localStorage.removeItem("user");
 };
