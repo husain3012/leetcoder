@@ -24,5 +24,6 @@ export interface IGroupMember {
     easySolved: number;
     mediumSolved: number;
     hardSolved: number;
+    avatar?: string;
   } | null;
 }

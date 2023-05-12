@@ -9,6 +9,7 @@ import {
   Spin,
   message,
   theme,
+  Typography,
 } from "antd";
 import Link from "next/link";
 import axios from "axios";
@@ -16,10 +17,12 @@ import IGroup from "../../@types/group";
 import { CopyFilled, EditOutlined, SettingOutlined } from "@ant-design/icons";
 import SITE_CONFIG from "../../site_config";
 
+const { Text } = Typography;
+
 const { Meta } = Card;
 
 const CreateGroup = () => {
-  const {token} = theme.useToken();
+  const { token } = theme.useToken();
   const [groupCreated, setGroupCreated] = useState<IGroup | null>(null);
   const [creatingGroup, setCreatingGroup] = useState(false);
 
@@ -47,8 +50,7 @@ const CreateGroup = () => {
           disabled={creatingGroup}
           name="basic"
           labelCol={{ span: 10 }}
-          style={{width:350}}
-
+          style={{ width: 350 }}
           initialValues={{ remember: true }}
           onFinish={onFinish}
           autoComplete="off"
@@ -79,8 +81,8 @@ const CreateGroup = () => {
             <Input placeholder="link for a custom cover photo" />
           </Form.Item>
 
-          <Form.Item style={{textAlign:"center"}}>
-            <Button type="primary" htmlType="submit" >
+          <Form.Item style={{ textAlign: "center" }}>
+            <Button type="primary" htmlType="submit">
               Submit
             </Button>
           </Form.Item>
@@ -102,19 +104,32 @@ const CreateGroup = () => {
           ]}
         >
           <Meta
-            avatar={
-              <Avatar src={SITE_CONFIG.leetcode_logo} />
-            }
+            avatar={<Avatar src={SITE_CONFIG.leetcode_logo} />}
             title={`${groupCreated.name}`}
-
-            description={<div>
-              <p>
-              Invite id: <code style={{color:token.colorPrimary, fontWeight:"bold"}}>{groupCreated.inviteID}</code>
-              </p>
-              <p>
-                Keep this invite id safe as you wont be able to generate it again.
-              </p>
-            </div>}
+            description={
+              <div>
+                <Link
+                  href={`/groups/${groupCreated.id}`}
+                  target="_blank"
+                  rel="noreferrer"
+                >{`${window.origin}/groups/${groupCreated.id}`}</Link>
+                <p>
+                  Invite id:{" "}
+                  <Text code
+                    style={{ color: token.colorPrimary}}
+                  >
+                    {groupCreated.inviteID}
+                  </Text>
+                </p>
+                
+                <p>
+                  <Text type="danger">
+                    Keep this invite id safe as you wont be able to generate it
+                    again.
+                  </Text>
+                </p>
+              </div>
+            }
           />
         </Card>
       )}

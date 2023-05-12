@@ -14,7 +14,7 @@ const SiteLayout = (props) => {
         <SiteHeader />
       </Header>
 
-      <Content style={{ backgroundColor: token.colorBgBase }}>
+      <Content style={{ backgroundColor: token.colorBgBase, padding:"0 1em" }}>
         {props.children}
       </Content>
       <Footer style={{ textAlign: "center", marginTop: "auto" }}>

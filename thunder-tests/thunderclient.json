@@ -23,16 +23,16 @@
     "colId": "afd111b2-fc41-4594-8680-223aa29d6ceb",
     "containerId": "",
     "name": "Join User",
-    "url": "{{host}}/api/groups/join/1tbxJ1GDh7",
+    "url": "{{host}}/api/groups/join/QXzkvZt8B1",
     "method": "POST",
     "sortNum": 20000,
     "created": "2023-05-05T11:04:29.409Z",
-    "modified": "2023-05-11T18:40:45.771Z",
+    "modified": "2023-05-12T00:12:05.755Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"name\":\"abhiyasdsadadav05\",\n  \"leetcodeUsername\": \"husain3012\",\n  \"email\" :\"hsr3012kalimg@gmail.com\"\n}",
+      "raw": "{\n  \"name\":\"Husain Shahid Rao\",\n  \"leetcodeUsername\": \"husain3012\",\n  \"email\" :\"hsr3012kalimg@gmail.com\"\n}",
       "form": []
     },
     "tests": []
@@ -96,11 +96,11 @@
     "colId": "4b21f778-f964-46fb-ae23-b83cb406b1af",
     "containerId": "",
     "name": "Update users",
-    "url": "{{host}}/api/update/queue?limit=5&age=1000",
+    "url": "{{host}}/api/update/queue?limit=5&age=10",
     "method": "GET",
     "sortNum": 10000,
     "created": "2023-05-07T20:23:28.294Z",
-    "modified": "2023-05-08T12:35:43.248Z",
+    "modified": "2023-05-11T23:23:31.899Z",
     "headers": [],
     "params": [
       {
@@ -110,7 +110,7 @@
       },
       {
         "name": "age",
-        "value": "1000",
+        "value": "10",
         "isPath": false
       }
     ],

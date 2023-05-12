@@ -33,8 +33,8 @@ export default function Index() {
   }
   return (
     <div>
-      <div style={{ margin: "2em" }}>
-        <Typography style={{ fontSize: "6em" }}>
+      <div style={{ margin: "2em auto" }}>
+        <Typography style={{ fontSize: "5.5em" }}>
           <span style={{ color: token.colorPrimary }}>Leet</span>
           <span>
             <span style={{ color: token.colorWhite }}>coder</span>
@@ -64,17 +64,17 @@ export default function Index() {
           gap: 4,
         }}
       >
-        <Card title="Create A Group" style={{ margin: "1em" }}>
+        <Card title="Create A Group" style={{ margin: "2em auto" }}>
           <CreateGroup />
         </Card>
 
-        <Card title="Join Existing Group" style={{ margin: "1em" }}>
+        <Card title="Join Existing Group" style={{ margin: "2em auto" }}>
           <JoinGroup />
         </Card>
       </div>
       <Divider />
 
-      <Card title="Search" style={{ margin: "1em" }}>
+      <Card title="Search" style={{ margin: "2em auto", maxWidth: "50rem" }}>
         <Search
           placeholder="group name"
           enterButton="Search"

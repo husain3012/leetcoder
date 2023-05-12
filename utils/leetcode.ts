@@ -50,5 +50,6 @@ export const getLeetcodeStatsToSave = (leetcodeUser: ILeetcodeUser) => {
     ).count,
     ranking: leetcodeUser.profile.ranking,
     streak: leetcodeUser.userCalendar.streak,
+    avatar: leetcodeUser.profile.userAvatar
   };
 };

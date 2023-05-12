@@ -10,6 +10,9 @@ async function seed() {
   await prisma.leetcodeInfo.deleteMany()
   await prisma.user.deleteMany()
   await prisma.group.deleteMany()
+
+
+  // return;
  
   
 

@@ -22,6 +22,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                     update: userData
                 }
             }
+        },
+        include:{
+          leetcodeStats: true
         }
     })
   

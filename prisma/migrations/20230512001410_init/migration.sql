@@ -6,6 +6,7 @@ CREATE TABLE "User" (
     "leetcodeUsername" TEXT NOT NULL,
     "lastAccessed" TIMESTAMP(3) NOT NULL,
     "lastUpdated" TIMESTAMP(3) NOT NULL,
+    "failedRetries" INTEGER NOT NULL DEFAULT 0,
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
 );
@@ -18,6 +19,7 @@ CREATE TABLE "Group" (
     "coverPhoto" TEXT,
     "createdByEmail" TEXT NOT NULL,
     "inviteID" TEXT NOT NULL,
+    "lastAccessed" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "Group_pkey" PRIMARY KEY ("id")
 );
@@ -25,6 +27,7 @@ CREATE TABLE "Group" (
 -- CreateTable
 CREATE TABLE "LeetcodeInfo" (
     "id" SERIAL NOT NULL,
+    "avatar" TEXT,
     "leetcodeUsername" TEXT NOT NULL,
     "ranking" INTEGER NOT NULL,
     "streak" INTEGER NOT NULL,

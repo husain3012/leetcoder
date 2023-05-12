@@ -32,12 +32,15 @@ model Group {
   members        User[]
   createdByEmail String
   inviteID       String  @unique
+  lastAccessed  DateTime @default(now())
+
 }
 
 model LeetcodeInfo {
-  id               Int    @id @default(autoincrement())
-  username         User   @relation(fields: [leetcodeUsername], references: [leetcodeUsername])
-  leetcodeUsername String @unique
+  id               Int     @id @default(autoincrement())
+  username         User    @relation(fields: [leetcodeUsername], references: [leetcodeUsername])
+  avatar           String?
+  leetcodeUsername String  @unique
   ranking          Int
   streak           Int
   easySolved       Int
