@@ -50,7 +50,7 @@ const JoinGroup = () => {
     <Form
       disabled={joiningGroup}
       labelCol={{ span: 12 }}
-      style={{ width: 350 }}
+      style={{ width: 300 }}
       onFinish={onFinish}
       autoComplete="off"
     >

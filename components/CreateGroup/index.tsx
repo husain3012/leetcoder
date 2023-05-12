@@ -14,7 +14,7 @@ import {
 import Link from "next/link";
 import axios from "axios";
 import IGroup from "../../@types/group";
-import { CopyFilled, EditOutlined, SettingOutlined } from "@ant-design/icons";
+import { CopyFilled } from "@ant-design/icons";
 import SITE_CONFIG from "../../site_config";
 
 const { Text } = Typography;
@@ -50,7 +50,7 @@ const CreateGroup = () => {
           disabled={creatingGroup}
           name="basic"
           labelCol={{ span: 10 }}
-          style={{ width: 350 }}
+          style={{ width: 300 }}
           initialValues={{ remember: true }}
           onFinish={onFinish}
           autoComplete="off"
@@ -100,7 +100,7 @@ const CreateGroup = () => {
                 );
               }}
               key="copy"
-            />,
+            />
           ]}
         >
           <Meta

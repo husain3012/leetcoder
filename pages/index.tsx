@@ -55,6 +55,7 @@ export default function Index() {
   };
 
   useEffect(() => {
+    
     const loadUser = async () => {
       setSavedUserLoading(true);
       try {
