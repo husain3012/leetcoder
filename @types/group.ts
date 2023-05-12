@@ -26,4 +26,5 @@ export interface IGroupMember {
     hardSolved: number;
     avatar?: string;
   } | null;
+  groups?: IGroup[]
 }

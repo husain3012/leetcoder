@@ -32,6 +32,7 @@ export const updateQueue = async (
       const leetcodeStatsData = await leetcodeStats([user.leetcodeUsername]);
       const userLeetcodeData =
         leetcodeStatsData.length != 0 && leetcodeStatsData[0];
+      const leetcodeStatsToSave = getLeetcodeStatsToSave(userLeetcodeData);
 
       await db.user.update({
         where: {
@@ -43,8 +44,8 @@ export const updateQueue = async (
             ? {
                 leetcodeStats: {
                   upsert: {
-                    create: getLeetcodeStatsToSave(userLeetcodeData),
-                    update: getLeetcodeStatsToSave(userLeetcodeData),
+                    update: leetcodeStatsToSave,
+                    create: leetcodeStatsToSave,
                   },
                 },
               }

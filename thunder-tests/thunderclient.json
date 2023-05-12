@@ -135,5 +135,25 @@
       }
     ],
     "tests": []
+  },
+  {
+    "_id": "3364ed44-3d3f-4f1c-bb33-140b440c994b",
+    "colId": "afd111b2-fc41-4594-8680-223aa29d6ceb",
+    "containerId": "",
+    "name": "User Info",
+    "url": "{{host}}/api/groups/user?leetcodeUsername=ssadsad",
+    "method": "GET",
+    "sortNum": 40000,
+    "created": "2023-05-12T14:39:02.992Z",
+    "modified": "2023-05-12T15:06:15.618Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "leetcodeUsername",
+        "value": "ssadsad",
+        "isPath": false
+      }
+    ],
+    "tests": []
   }
 ]
