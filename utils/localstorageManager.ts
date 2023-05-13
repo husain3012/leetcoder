@@ -9,6 +9,10 @@ export const saveUserToLocal = (leetcodeUsername: string) => {
   localStorage.setItem("user", leetcodeUsername);
 };
 
+export const getUsernameFromLocal = () => {
+  return typeof(window)!=="undefined" ? localStorage.getItem("user") :"";
+};
+
 export const loadUserFromLocal = async (): Promise<IGroupMember | null> => {
   const leetcodeUsername = localStorage.getItem("user");
   if (!leetcodeUsername || leetcodeUsername=="") return null;

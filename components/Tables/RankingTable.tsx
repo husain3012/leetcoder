@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { CSSProperties, useEffect, useState } from "react";
 
 import {
   Avatar,
@@ -17,16 +17,22 @@ import Link from "next/link";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 
+import { useMediaQuery } from "react-responsive";
+
 import { IGroupMember } from "../../@types/group";
 
 import type { ColumnsType, TableProps } from "antd/es/table";
 import axios from "axios";
+import { getUsernameFromLocal } from "../../utils";
 // import { Pie } from "@ant-design/charts";
 dayjs.extend(relativeTime);
 
 const RankingTable = ({ users }: { users: IGroupMember[] }) => {
   const [usersData, setUsersData] = useState<IGroupMember[]>([]);
   const [updatingUser, setUpdatingUser] = useState("");
+  const loggedinUser = getUsernameFromLocal()
+
+  const isMobile = useMediaQuery({ query: '(max-width: 956px)' })
 
   const updatedUserHandler = async (username) => {
     if (updatingUser != "") return;
@@ -44,6 +50,10 @@ const RankingTable = ({ users }: { users: IGroupMember[] }) => {
     setUpdatingUser("");
   };
 
+  const currentUserStyles : CSSProperties = {
+    fontWeight: 'bolder',
+  }
+
   const columns: ColumnsType<IGroupMember> = [
     {
       title: "Name",
@@ -51,33 +61,39 @@ const RankingTable = ({ users }: { users: IGroupMember[] }) => {
       onFilter: (value: string, record) => record.name.indexOf(value) === 0,
       sorter: (a, b) => a.name.length - b.name.length,
       render: (_, r) => (
-        <Tooltip title={"aka " + r.name}>
-          <Space>
+        <Tooltip title={r.leetcodeUsername===loggedinUser?"You":"aka " + r.name}>
+          <Space style={r.leetcodeUsername===loggedinUser?currentUserStyles:{}} >
 
-          {r.leetcodeStats?.avatar ? (
+        
+
+          {
+            !isMobile && <>
+              {r.leetcodeStats?.avatar ? (
             <Avatar  src={r.leetcodeStats?.avatar} />
           ) : (
             <Avatar >{r.name[0].toUpperCase()}</Avatar>
           )}
-          <Divider type="vertical"  />
+          <Divider type="vertical"  /></>
+          }
 
           <Link
             href={`https://leetcode.com/${r.leetcodeUsername}`}
             target="_blank"
             rel="noreferrer"
+            
             >
             {r.leetcodeUsername}
           </Link>
             </Space>
         </Tooltip>
       ),
-      width: "20%",
+      width: isMobile?"15%":"20%",
 
       // sortDirections: ["ascend", "descend"],
     },
     {
       title: "Ranking",
-      dataIndex: "name",
+      dataIndex: "ranking",
       defaultSortOrder: "ascend",
       sorter: (a, b) => a.leetcodeStats?.ranking - b.leetcodeStats?.ranking,
       render: (v, r) =>
@@ -136,8 +152,10 @@ const RankingTable = ({ users }: { users: IGroupMember[] }) => {
 
   return (
     <Table
+      // rowClassName={(r, i)=>r.leetcodeUsername===loggedinUser?"rankingTable-selected":""}
+      rowKey={(r,i)=>r.id}
       columns={columns}
-      dataSource={usersData.map(u=>({...u, key:u.id}))}
+      dataSource={usersData}
       pagination={{
         pageSize: 50,
       }}
