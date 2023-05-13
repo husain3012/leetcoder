@@ -30,7 +30,7 @@ const SiteLayout = (props) => {
       <Header style={{ backgroundColor: token.colorBgLayout }}>
         <SiteHeader />
       </Header>
-      <BarLoader style={{width:"100vw"}} loading={isLoading} style={{backgroundColor:"transparent"}} color={token.colorPrimary} />
+      <BarLoader  loading={isLoading} style={{backgroundColor:"transparent", width:"100vw"}} color={token.colorPrimary} />
 
       <Content style={{ backgroundColor: token.colorBgBase, padding: "0 1em" }}>
         {props.children}
