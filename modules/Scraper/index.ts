@@ -9,6 +9,9 @@ let isFunctionRunning = false;
 const AGE  = Number(process.env.UPDATE_AGE) || 3600
 const LIMIT  = Number(process.env.UPDATE_LIMIT) || 20
 const TIMEOUT  = Number(process.env.UPDATE_TIMEOUT) || 200
+
+
+const CRON_STRING = process.env.CRON_STRING ||'*/2 * * * *'
 const updateQueue = async (age = AGE, limit = LIMIT, timeout = TIMEOUT) => {
   console.log(`age: ${age}, limit: ${limit}, timeout: ${timeout}`)
   let updatedUsers = [];
@@ -69,7 +72,7 @@ console.log(`Currently processing ${usersToUpdate.length} users:  `, usersToUpda
   console.log("Done ✅")
 };
 
-cron.schedule('*/2 * * * *', async ()=> {
+cron.schedule(CRON_STRING, async ()=> {
   console.log("⏲️ Triggering CRON JOB!")
   if(isFunctionRunning) {
     console.log("⚠️ Job skipped: ALREADY RUNNING")

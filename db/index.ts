@@ -2,7 +2,7 @@ import { PrismaClient } from "@prisma/client";
 
 let db : PrismaClient | null = null;
 
-if(db===null && typeof(window)==="undefined"){
+if(db===null){
     console.log("Creating Prisma Client")
     db = new PrismaClient();
 }
