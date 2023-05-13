@@ -258,7 +258,7 @@ const SavedUserInfo = ({
         
             <Card
               style={{ width: 256 }}
-              cover={<img onClick={()=> router.push(`/groups/${group.id}`)} alt="cover photo" src={group.coverPhoto} />}
+              cover={<img style={{cursor:"pointer"}} onClick={()=> router.push(`/groups/${group.id}`)} alt="cover photo" src={group.coverPhoto} />}
               actions={[
                 <Tooltip title="Copy link to clipboard">
 

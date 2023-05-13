@@ -6,6 +6,7 @@ import Link from "next/link";
 
 const { Header, Footer, Sider, Content } = Layout;
 
+
 const SiteLayout = (props) => {
   const { token } = theme.useToken();
   return (

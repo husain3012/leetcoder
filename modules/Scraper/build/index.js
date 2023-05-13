@@ -16,9 +16,14 @@ const client_1 = require("@prisma/client");
 const dayjs_1 = __importDefault(require("dayjs"));
 const utils_1 = require("./utils");
 const node_cron_1 = __importDefault(require("node-cron"));
+const dotenv_1 = __importDefault(require("dotenv"));
+dotenv_1.default.config();
 const db = new client_1.PrismaClient();
 let isFunctionRunning = false;
-const updateQueue = (age = 1000, limit = 10, timeout = 200) => __awaiter(void 0, void 0, void 0, function* () {
+const AGE = Number(process.env.UPDATE_AGE) || 3600;
+const LIMIT = Number(process.env.UPDATE_LIMIT) || 20;
+const TIMEOUT = Number(process.env.UPDATE_TIMEOUT) || 200;
+const updateQueue = (age = AGE, limit = LIMIT, timeout = TIMEOUT) => __awaiter(void 0, void 0, void 0, function* () {
     console.log(`age: ${age}, limit: ${limit}, timeout: ${timeout}`);
     let updatedUsers = [];
     try {
