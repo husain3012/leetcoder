@@ -17,5 +17,5 @@
     "outDir": "./"
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "prisma/seed.ts", "prisma/seed_data.js"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "modules"]
 }
