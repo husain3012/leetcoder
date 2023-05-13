@@ -94,9 +94,9 @@ const CreateGroup = () => {
           actions={[
             <CopyFilled
               onClick={async () => {
-                await navigator.clipboard.writeText(groupCreated.inviteID);
+                await navigator.clipboard.writeText(`${window.origin}?invite_id=${groupCreated.inviteID}`);
                 message.success(
-                  `${groupCreated.inviteID} copied to clipboard!`
+                  `Invite link copied to clipboard!`
                 );
               }}
               key="copy"
@@ -112,9 +112,9 @@ const CreateGroup = () => {
                   href={`/groups/${groupCreated.id}`}
                   target="_blank"
                   rel="noreferrer"
-                >{`${window.origin}/groups/${groupCreated.id}`}</Link>
+                >Group Link</Link>
                 <p>
-                  Invite id:{" "}
+                  Invite Link:{" "}
                   <Text code
                     style={{ color: token.colorPrimary}}
                   >
