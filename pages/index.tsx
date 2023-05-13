@@ -37,6 +37,7 @@ import {
   UserOutlined,
 } from "@ant-design/icons";
 import { useRouter } from "next/router";
+import { group } from "console";
 
 const { Search } = Input;
 const { Text, Title } = Typography;
@@ -66,10 +67,9 @@ export default function Index() {
 
   useEffect(() => {
     const loadUser = async () => {
-      
       setSavedUserLoading(true);
       try {
-        console.log("Fetching API")
+        console.log("Fetching API");
         const user = await loadUserFromLocal();
         if (user == null) {
           setSavedUserLoading(false);
@@ -205,9 +205,6 @@ const SavedUserInfo = ({
   savedUser: IGroupMember;
   setSavedUser: any;
 }) => {
-
-  const router = useRouter();
-
   const { token } = theme.useToken();
   const logoutHandler = () => {
     removeUserFromLocal();
@@ -255,49 +252,64 @@ const SavedUserInfo = ({
         }}
       >
         {savedUser.groups.map((group) => (
-        
-            <Card
-              style={{ width: 256 }}
-              cover={<img style={{cursor:"pointer"}} onClick={()=> router.push(`/groups/${group.id}`)} alt="cover photo" src={group.coverPhoto} />}
-              actions={[
-                <Tooltip title="Copy link to clipboard">
-
-                <Button
-                  icon={<CopyFilled />}
-                  type="text"
-                  onClick={() =>
-                    navigator.clipboard.writeText(
-                      `${window.origin}/groups/${group.id}`
-                    )
-                  }
-                  
-                />
-                </Tooltip>
-
-                ,
-
-                <Space>
-                  <UserOutlined />
-                  {group._count.members}
-                </Space>,
-              ]}
-            >
-              <Link href={`/groups/${group.id}`}>
-
-              <Meta
-                avatar={<Avatar src={SITE_CONFIG.leetcode_logo} />}
-                title={`${group.name}`}
-                description={
-                  <Typography.Paragraph>
-                    {group.description}
-                  </Typography.Paragraph>
-                }
-              />
-              </Link>
-
-            </Card>
+          <GroupCard key={group.id} group={group} />
         ))}
       </div>
     </div>
+  );
+};
+
+const GroupCard = ({ group }: { group: IGroup }) => {
+  const router = useRouter();
+
+  const [copied, setCopied] = useState(false);
+  let copyTimeout: any = null;
+  const copyHandler = async () => {
+    if (copyTimeout) {
+      clearTimeout(copyTimeout);
+      setCopied(false);
+    }
+    await navigator.clipboard.writeText(`${window.origin}/groups/${group.id}`);
+    setCopied(true);
+    copyTimeout = setTimeout(() => {
+      setCopied(false);
+    }, 1000);
+  };
+
+  return (
+    <Card
+      style={{ width: 256 }}
+      cover={
+        <img
+          style={{ cursor: "pointer" }}
+          onClick={() => router.push(`/groups/${group.id}`)}
+          alt="cover photo"
+          src={group.coverPhoto}
+        />
+      }
+      actions={[
+        <Space>
+          <Tooltip title={copied?"Copied!":`Copy link to clipboard`}>
+            <CopyFilled type="text" onClick={copyHandler} />
+          </Tooltip>
+        </Space>,
+        <Space>
+          <Tooltip title={`${group._count.members} members`}>
+            <UserOutlined />
+            {group._count.members}
+          </Tooltip>
+        </Space>,
+      ]}
+    >
+      <Link href={`/groups/${group.id}`}>
+        <Meta
+          avatar={<Avatar src={SITE_CONFIG.leetcode_logo} />}
+          title={`${group.name}`}
+          description={
+            <Typography.Paragraph>{group.description}</Typography.Paragraph>
+          }
+        />
+      </Link>
+    </Card>
   );
 };

@@ -73,7 +73,8 @@ console.log(`Currently processing ${usersToUpdate.length} users:  `, usersToUpda
 };
 
 cron.schedule(CRON_STRING, async ()=> {
-  console.log("⏲️ Triggering CRON JOB!")
+  console.log(`[${dayjs().format("mm:hh a, DD-MMM-YYYY")}] Triggering CRON JOB ⏲!`)
+  
   if(isFunctionRunning) {
     console.log("⚠️ Job skipped: ALREADY RUNNING")
   };
