@@ -87,7 +87,7 @@ const RankingTable = ({ users }: { users: IGroupMember[] }) => {
             </Space>
         </Tooltip>
       ),
-      width: isMobile?"15%":"20%",
+      width: "20%",
 
       // sortDirections: ["ascend", "descend"],
     },
@@ -100,17 +100,18 @@ const RankingTable = ({ users }: { users: IGroupMember[] }) => {
         r.leetcodeStats ? r.leetcodeStats?.ranking : <QuestionOutlined />,
 
       align: "center",
-      width: "15%",
+      width: "18%",
     },
     {
-      title: "Total Solved",
-      dataIndex: "totalSolved",
+      title: "Question Solved",
+      // dataIndex: "totalSolved",
       sorter: (a, b) =>
         a.leetcodeStats ? getTotalSolved(a) - getTotalSolved(b) : null,
       render: (_, r) =>
         r.leetcodeStats ? getTotalSolved(r) : <QuestionOutlined />,
       align: "center",
-      width: "10%",
+      width: "18%",
+      
     },
     {
       title: "Max Streak",
@@ -119,7 +120,8 @@ const RankingTable = ({ users }: { users: IGroupMember[] }) => {
       render: (_, r) =>
         r.leetcodeStats ? r.leetcodeStats?.streak : <QuestionOutlined />,
       align: "center",
-      width: "10%",
+      width: "18%",
+      responsive: ["sm"]
     },
     {
       title: "Last Updated",
@@ -128,7 +130,9 @@ const RankingTable = ({ users }: { users: IGroupMember[] }) => {
         dayjs(a.lastUpdated).toDate().getTime() -
         dayjs(b.lastUpdated).toDate().getTime(),
       render: (_, r) => dayjs().to(dayjs(r.lastUpdated)),
-      width: "15%",
+      width: "16&",
+      responsive: ["sm"]
+
     },
     {
       title: "Update",
@@ -142,7 +146,9 @@ const RankingTable = ({ users }: { users: IGroupMember[] }) => {
           onClick={() => updatedUserHandler(b.leetcodeUsername)}
         />
       ),
-      width: "5%",
+      width: "10%",
+      responsive: ["sm"]
+
     },
   ];
 
@@ -152,6 +158,7 @@ const RankingTable = ({ users }: { users: IGroupMember[] }) => {
 
   return (
     <Table
+    size={isMobile?"small":"middle"}
       // rowClassName={(r, i)=>r.leetcodeUsername===loggedinUser?"rankingTable-selected":""}
       rowKey={(r,i)=>r.id}
       columns={columns}
