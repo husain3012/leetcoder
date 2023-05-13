@@ -247,6 +247,7 @@ const SavedUserInfo = ({
           display: "flex",
           flexWrap: "wrap",
           justifyContent: "center",
+          alignItems:"center",
 
           gap: 4,
         }}
@@ -278,12 +279,13 @@ const GroupCard = ({ group }: { group: IGroup }) => {
 
   return (
     <Card
-      style={{ width: 256 }}
+      style={{ width: 256, margin: "1em"}}
       cover={
         <img
-          style={{ cursor: "pointer" }}
+          style={{ cursor: "pointer", objectFit:"cover", height: 156  }}
           onClick={() => router.push(`/groups/${group.id}`)}
           alt="cover photo"
+
           src={group.coverPhoto}
         />
       }
