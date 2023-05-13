@@ -26,11 +26,36 @@ const SiteLayout = (props) => {
     });
   }, [Router]);
   return (
-    <div style={{ display: "flex", flexFlow: "column", minHeight: "100vh" }}>
+    <div
+      style={{
+        display: "flex",
+        flexFlow: "column",
+        minHeight: "100vh",
+        width: "100vw",
+      }}
+    >
+     
+        <BarLoader
+          loading={isLoading}
+          width={"100%"}
+          cssOverride={{
+            display: "block",
+            position:"fixed",
+            margin: "0 auto",
+            borderColor: "red",
+            backgroundColor: token.colorBgLayout,
+            top: 0,
+            zIndex: 100,
+            width: "100%",
+            overflowX: "hidden",
+          }}
+          speedMultiplier={1.5}
+          color={token.colorPrimary}
+        />
+  
       <Header style={{ backgroundColor: token.colorBgLayout }}>
         <SiteHeader />
       </Header>
-      <BarLoader  loading={isLoading} style={{backgroundColor:"transparent", width:"100vw"}} color={token.colorPrimary} />
 
       <Content style={{ backgroundColor: token.colorBgBase, padding: "0 1em" }}>
         {props.children}
