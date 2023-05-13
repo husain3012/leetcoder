@@ -50,7 +50,7 @@ const CreateGroup = () => {
           disabled={creatingGroup}
           name="basic"
           labelCol={{ span: 10 }}
-          style={{ width: 300 }}
+          // style={{ width: 256 }}
           initialValues={{ remember: true }}
           onFinish={onFinish}
           autoComplete="off"

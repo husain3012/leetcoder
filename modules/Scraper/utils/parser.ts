@@ -1,4 +1,4 @@
-import ILeetcodeUser from "../../../@types/leetcode_user";
+import type ILeetcodeUser from "../@types/leetcode_user";
 
 const start = '<script id="__NEXT_DATA__" type="application/json">';
 const end = "</script>";

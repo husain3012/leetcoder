@@ -1,4 +1,4 @@
-import { parseHTML } from "../../../utils/parser";
+import { parseHTML } from "../../../utils";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 

@@ -15,6 +15,7 @@ import axios from "axios";
 import IGroup from "../../@types/group";
 import { CopyFilled, EditOutlined, SettingOutlined } from "@ant-design/icons";
 import { useRouter } from "next/router";
+import { saveUserToLocal } from "../../utils";
 
 const { Meta } = Card;
 
@@ -39,6 +40,7 @@ const JoinGroup = () => {
       message.success(
         `${values.leetcodeUsername}  joined group'${joinedGroup.data.name}'!`
       );
+      saveUserToLocal(values.leetcodeUsername)
       router.replace(`/groups/${joinedGroup.data.id}`);
     } catch (error) {
         console.log(error)
@@ -50,7 +52,7 @@ const JoinGroup = () => {
     <Form
       disabled={joiningGroup}
       labelCol={{ span: 12 }}
-      style={{ width: 300 }}
+      // style={{ width: 256 }}
       onFinish={onFinish}
       autoComplete="off"
     >

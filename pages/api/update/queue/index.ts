@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 
-import { updateQueue } from "../../../../utils/queueUpdater";
+import { updateQueue } from "../../../../utils";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 

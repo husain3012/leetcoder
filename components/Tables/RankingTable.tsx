@@ -137,7 +137,7 @@ const RankingTable = ({ users }: { users: IGroupMember[] }) => {
   return (
     <Table
       columns={columns}
-      dataSource={usersData}
+      dataSource={usersData.map(u=>({...u, key:u.id}))}
       pagination={{
         pageSize: 50,
       }}

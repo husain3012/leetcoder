@@ -15,6 +15,7 @@ import {
   Avatar,
   Spin,
   Button,
+  Tooltip,
 } from "antd";
 import JoinGroup from "../components/JoinGroup";
 import IGroup, { IGroupMember } from "../@types/group";
@@ -24,9 +25,18 @@ import {
   loadUserFromLocal,
   removeUserFromLocal,
   saveUserToLocal,
-} from "../utils/localstorageManager";
+} from "../utils";
 import SITE_CONFIG from "../site_config";
-import { EyeFilled, LinkOutlined, Loading3QuartersOutlined, LoadingOutlined, LogoutOutlined, UserOutlined } from "@ant-design/icons";
+import {
+  CopyFilled,
+  EyeFilled,
+  LinkOutlined,
+  Loading3QuartersOutlined,
+  LoadingOutlined,
+  LogoutOutlined,
+  UserOutlined,
+} from "@ant-design/icons";
+import { useRouter } from "next/router";
 
 const { Search } = Input;
 const { Text, Title } = Typography;
@@ -55,10 +65,11 @@ export default function Index() {
   };
 
   useEffect(() => {
-    
     const loadUser = async () => {
+      
       setSavedUserLoading(true);
       try {
+        console.log("Fetching API")
         const user = await loadUserFromLocal();
         if (user == null) {
           setSavedUserLoading(false);
@@ -76,7 +87,11 @@ export default function Index() {
 
   return (
     <div>
-      <Spin spinning={savedUserLoading} size="large" indicator={<LoadingOutlined/>}>
+      <Spin
+        spinning={savedUserLoading}
+        size="large"
+        indicator={<LoadingOutlined />}
+      >
         {savedUser ? (
           <SavedUserInfo savedUser={savedUser} setSavedUser={setSavedUser} />
         ) : (
@@ -133,6 +148,7 @@ const LandingHero = ({ setSavedUser }: { setSavedUser: any }) => {
       );
       const userInfo = resp.data;
       if (!userInfo) {
+        setLoading(false);
         return message.error("No saved user found!");
       }
       message.success(`Found ${loadUserString} `);
@@ -189,6 +205,9 @@ const SavedUserInfo = ({
   savedUser: IGroupMember;
   setSavedUser: any;
 }) => {
+
+  const router = useRouter();
+
   const { token } = theme.useToken();
   const logoutHandler = () => {
     removeUserFromLocal();
@@ -236,28 +255,47 @@ const SavedUserInfo = ({
         }}
       >
         {savedUser.groups.map((group) => (
-          <Card
-            key={group.id}
-            style={{ width: 256 }}
-            cover={<img alt="cover photo" src={group.coverPhoto} />}
-            actions={[
+        
+            <Card
+              style={{ width: 256 }}
+              cover={<img onClick={()=> router.push(`/groups/${group.id}`)} alt="cover photo" src={group.coverPhoto} />}
+              actions={[
+                <Tooltip title="Copy link to clipboard">
+
+                <Button
+                  icon={<CopyFilled />}
+                  type="text"
+                  onClick={() =>
+                    navigator.clipboard.writeText(
+                      `${window.origin}/groups/${group.id}`
+                    )
+                  }
+                  
+                />
+                </Tooltip>
+
+                ,
+
+                <Space>
+                  <UserOutlined />
+                  {group._count.members}
+                </Space>,
+              ]}
+            >
               <Link href={`/groups/${group.id}`}>
-                <LinkOutlined />
-              </Link>,
-              <Space>
-                <UserOutlined />
-                {group._count.members}
-              </Space>,
-            ]}
-          >
-            <Meta
-              avatar={<Avatar src={SITE_CONFIG.leetcode_logo} />}
-              title={`${group.name}`}
-              description={
-                <Typography.Paragraph>{group.description}</Typography.Paragraph>
-              }
-            />
-          </Card>
+
+              <Meta
+                avatar={<Avatar src={SITE_CONFIG.leetcode_logo} />}
+                title={`${group.name}`}
+                description={
+                  <Typography.Paragraph>
+                    {group.description}
+                  </Typography.Paragraph>
+                }
+              />
+              </Link>
+
+            </Card>
         ))}
       </div>
     </div>
