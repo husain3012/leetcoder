@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Avatar,
   Button,
@@ -9,6 +9,7 @@ import {
   Spin,
   message,
   theme,
+
 } from "antd";
 import Link from "next/link";
 import axios from "axios";
@@ -18,11 +19,21 @@ import { useRouter } from "next/router";
 import { saveUserToLocal } from "../../utils";
 
 const { Meta } = Card;
+const {useForm} = Form;
 
-const JoinGroup = () => {
+const JoinGroup = ({inviteID}:{inviteID?:string}) => {
   const { token } = theme.useToken();
   const router = useRouter();
   const [joiningGroup, setJoiningGroup] = useState(false);
+  const [form] = useForm()
+  useEffect(()=>{
+    if(inviteID){
+      form.setFields([{
+        name:"invite_id",
+        value:inviteID
+      }])
+    }
+  },[])
 
   const onFinish = async (values) => {
     if (joiningGroup) return;
@@ -50,6 +61,7 @@ const JoinGroup = () => {
   };
   return (
     <Form
+    form={form}
       disabled={joiningGroup}
       labelCol={{ span: 12 }}
       // style={{ width: 256 }}

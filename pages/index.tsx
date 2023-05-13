@@ -16,6 +16,7 @@ import {
   Spin,
   Button,
   Tooltip,
+  Modal,
 } from "antd";
 import JoinGroup from "../components/JoinGroup";
 import IGroup, { IGroupMember } from "../@types/group";
@@ -44,7 +45,10 @@ const { Text, Title } = Typography;
 const { Meta } = Card;
 
 export default function Index() {
+  const router = useRouter();
   const { token } = theme.useToken();
+  const query = router.query;
+  const inviteID = query.invite_id as string;
   const [searchString, setSearchString] = useState("");
   const [searchResult, setSearchResult] = useState<IGroup[]>([]);
   const [searchLoading, setSearchLoading] = useState(false);
@@ -112,10 +116,17 @@ export default function Index() {
           <CreateGroup />
         </Card>
 
-        <Card title="Join Existing Group" style={{ margin: "2em auto" }}>
+        <Card
+          id="join-group"
+          title="Join Existing Group"
+          style={{ margin: "2em auto" }}
+        >
           <JoinGroup />
         </Card>
       </div>
+      <Modal footer={null} open={!!inviteID}>
+        {inviteID && <JoinGroup inviteID={inviteID} />}
+      </Modal>
       <Divider />
 
       <Card title="Search" style={{ margin: "2em auto", maxWidth: "50rem" }}>
@@ -247,7 +258,7 @@ const SavedUserInfo = ({
           display: "flex",
           flexWrap: "wrap",
           justifyContent: "center",
-          alignItems:"center",
+          alignItems: "center",
 
           gap: 4,
         }}
@@ -279,19 +290,18 @@ const GroupCard = ({ group }: { group: IGroup }) => {
 
   return (
     <Card
-      style={{ width: 256, margin: "1em"}}
+      style={{ width: 256, margin: "1em" }}
       cover={
         <img
-          style={{ cursor: "pointer", objectFit:"cover", height: 156  }}
+          style={{ cursor: "pointer", objectFit: "cover", height: 156 }}
           onClick={() => router.push(`/groups/${group.id}`)}
           alt="cover photo"
-
           src={group.coverPhoto}
         />
       }
       actions={[
         <Space>
-          <Tooltip title={copied?"Copied!":`Copy link to clipboard`}>
+          <Tooltip title={copied ? "Copied!" : `Copy link to clipboard`}>
             <CopyFilled type="text" onClick={copyHandler} />
           </Tooltip>
         </Space>,
