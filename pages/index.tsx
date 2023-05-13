@@ -55,6 +55,7 @@ export default function Index() {
   const [savedUserLoading, setSavedUserLoading] = useState(false);
 
   const [savedUser, setSavedUser] = useState<IGroupMember | null>(null);
+  const [openModal,setOpenModal] = useState(false);
 
   const searchResultHandler = async () => {
     if (searchLoading) return;
@@ -70,6 +71,9 @@ export default function Index() {
   };
 
   useEffect(() => {
+    console.log(inviteID)
+    if(inviteID) setOpenModal(true)
+
     const loadUser = async () => {
       setSavedUserLoading(true);
       try {
@@ -87,7 +91,7 @@ export default function Index() {
       setSavedUserLoading(false);
     };
     loadUser();
-  }, []);
+  }, [inviteID]);
 
   return (
     <div>
@@ -124,7 +128,7 @@ export default function Index() {
           <JoinGroup />
         </Card>
       </div>
-      <Modal footer={null} open={!!inviteID}>
+      <Modal title="Join Group" footer={null} open={openModal} onCancel={()=>setOpenModal(false)}>
         {inviteID && <JoinGroup inviteID={inviteID} />}
       </Modal>
       <Divider />
