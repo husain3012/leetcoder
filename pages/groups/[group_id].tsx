@@ -3,8 +3,9 @@ import React from "react";
 import { getGroupStatus } from "../../services/groups/status";
 import IGroup from "../../@types/group";
 import RankingTable from "../../components/Tables/RankingTable";
-import { Card, Divider, Typography, Avatar } from "antd";
+import { Card, Divider, Typography, Avatar, Tooltip } from "antd";
 import SITE_CONFIG from "../../site_config";
+import { SmileFilled, UserOutlined } from "@ant-design/icons";
 
 const { Meta } = Card;
 
@@ -13,14 +14,24 @@ const Group = ({ groupStats }: { groupStats: IGroup }) => {
     <div>
       <Card
         style={{ margin: "2em" }}
-        cover={<img alt="Cover Photo" src={groupStats.coverPhoto} style={{
-            maxHeight:300,
-            objectFit:"cover",
-        }} />}
+        cover={
+          <img
+            alt="Cover Photo"
+            src={groupStats.coverPhoto}
+            style={{
+              maxHeight: 300,
+              objectFit: "cover",
+            }}
+          />
+        }
       >
         <Meta
-          avatar={<Avatar src={SITE_CONFIG.leetcode_logo} />}
-          title={groupStats.name}
+          avatar={  <Tooltip title={`Created by ${groupStats.createdByEmail}`}><SmileFilled style={{fontSize:"2rem"}} /></Tooltip>}
+          title={
+          
+              groupStats.name
+        
+          }
           description={groupStats.description}
         />
       </Card>
@@ -29,7 +40,7 @@ const Group = ({ groupStats }: { groupStats: IGroup }) => {
         style={{
           margin: "2em",
           maxWidth: "100vw",
-          overflowX:"auto"
+          overflowX: "auto",
         }}
       >
         <RankingTable users={groupStats.members} />
