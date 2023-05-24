@@ -7,8 +7,6 @@ import { ApiError } from "next/dist/server/api-utils";
 import RequestError from "../../../../errors";
 import { getGroupStatus } from "../../../../services/groups/status";
 
-
-
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   switch (req.method) {
     case "GET":
@@ -28,11 +26,10 @@ const getHandler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     const group_id = Number(req.query.group_id);
 
-
     const group = await getGroupStatus(group_id);
-  
 
-  
+
+
     return res.send(group);
   } catch (error) {
     console.log(error);

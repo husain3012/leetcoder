@@ -14,7 +14,7 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-    "outDir": "./"
+    "outDir": "./",
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "prisma/seed.ts", "prisma/seed_data.js"],
   "exclude": ["node_modules", "modules"]

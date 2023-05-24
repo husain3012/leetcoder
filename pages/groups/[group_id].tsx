@@ -6,10 +6,15 @@ import RankingTable from "../../components/Tables/RankingTable";
 import { Card, Divider, Typography, Avatar, Tooltip } from "antd";
 import SITE_CONFIG from "../../site_config";
 import { SmileFilled, UserOutlined } from "@ant-design/icons";
+import QuestionSolvedBar from "../../components/Charts/QuestionSolvedBar";
 
 const { Meta } = Card;
 
 const Group = ({ groupStats }: { groupStats: IGroup }) => {
+
+
+
+
   return (
     <div>
       <Card
@@ -26,16 +31,26 @@ const Group = ({ groupStats }: { groupStats: IGroup }) => {
         }
       >
         <Meta
-          avatar={  <Tooltip title={`Created by ${groupStats.createdByEmail}`}><SmileFilled style={{fontSize:"2rem"}} /></Tooltip>}
-          title={
-          
-              groupStats.name
-        
+          avatar={
+            <Tooltip title={`Created by ${groupStats.createdByEmail}`}>
+              <SmileFilled style={{ fontSize: "2rem" }} />
+            </Tooltip>
           }
+          title={groupStats.name}
           description={groupStats.description}
         />
       </Card>
 
+  
+      <div
+        style={{
+          margin: "2em",
+          maxWidth: "100vw",
+          overflowX: "auto",
+        }}
+      >
+        <QuestionSolvedBar groupStats={groupStats} />
+      </div>
       <div
         style={{
           margin: "2em",
