@@ -7,10 +7,12 @@ const Column = dynamic(
   { ssr: false }
 );
 
-import React from "react";
-import { Card } from "antd";
+import React, { useEffect, useState } from "react";
+import { Card, Spin } from "antd";
 
 const QuestionSolvedBar = ({ groupStats }: { groupStats: IGroup }) => {
+  const [chartLoading, setChartLoading] = useState(true);
+  useEffect(() => setChartLoading(true), []);
   const bar_graph_data = [];
 
   groupStats.members.forEach((member) => {
@@ -35,39 +37,43 @@ const QuestionSolvedBar = ({ groupStats }: { groupStats: IGroup }) => {
     });
   });
   return (
-    <Card style={{ overflowX:"auto" }} title="Questions Solved Chart">
-      <Column
-        {...{
-          data: bar_graph_data,
-          isStack: true,
-          xField: "user",
-          yField: "solved",
-          seriesField: "type",
-          color: ["#FF375F", "#FFC01E", "#00B8A3"],
-          maxColumnWidth: 48,
-          legend: false,
-          
-          label: {
-            // 可手动配置 label 数据标签位置
-            position: "middle",
-            // 'top', 'bottom', 'middle'
-            // 可配置附加的布局方法
-            layout: [
-              // 柱形图数据标签位置自动调整
-              {
-                type: "interval-adjust-position",
-              }, // 数据标签防遮挡
-              {
-                type: "interval-hide-overlap",
-              }, // 数据标签文颜色自动调整
-              {
-                type: "adjust-color",
-              },
-            ],
-          },
-        }}
-      />
-    </Card>
+    <Card style={{ overflowX: "auto" }} title="Questions Solved Chart">
+        <Spin spinning={chartLoading}>
+        <Column
+          {...{
+            onReady : ()=>setChartLoading(false),
+            data: bar_graph_data,
+            isStack: true,
+            xField: "user",
+            yField: "solved",
+            seriesField: "type",
+            color: ["#FF375F", "#FFC01E", "#00B8A3"],
+            maxColumnWidth: 48,
+            legend: false,
+            key:"user",
+
+            label: {
+              // 可手动配置 label 数据标签位置
+              position: "middle",
+              // 'top', 'bottom', 'middle'
+              // 可配置附加的布局方法
+              layout: [
+                // 柱形图数据标签位置自动调整
+                {
+                  type: "interval-adjust-position",
+                }, // 数据标签防遮挡
+                {
+                  type: "interval-hide-overlap",
+                }, // 数据标签文颜色自动调整
+                {
+                  type: "adjust-color",
+                },
+              ],
+            },
+          }}
+        />
+    </Spin>
+      </Card>
   );
 };
 
