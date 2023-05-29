@@ -1,15 +1,12 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
   provider          = "postgresql"
-  url               = env("POSTGRES_PRISMA_URL") // uses connection pooling
-  directUrl         = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
-  shadowDatabaseUrl = env("POSTGRES_URL_NON_POOLING") // used for migrations
+  url               = env("POSTGRES_PRISMA_URL")
+  directUrl         = env("POSTGRES_URL_NON_POOLING")
+  shadowDatabaseUrl = env("POSTGRES_URL_NON_POOLING")
 }
 
 model User {
@@ -17,28 +14,26 @@ model User {
   email            String        @unique
   name             String
   leetcodeUsername String        @unique
-  groups           Group[]
-  leetcodeStats    LeetcodeInfo?
   lastAccessed     DateTime
   lastUpdated      DateTime
   failedRetries    Int           @default(0)
+  leetcodeStats    LeetcodeInfo?
+  groups           Group[]       @relation("GroupToUser")
 }
 
 model Group {
-  id             Int     @id @default(autoincrement())
-  name           String  @unique
+  id             Int      @id @default(autoincrement())
+  name           String   @unique
   description    String?
   coverPhoto     String?
-  members        User[]
   createdByEmail String
-  inviteID       String  @unique
-  lastAccessed  DateTime @default(now())
-
+  inviteID       String   @unique
+  lastAccessed   DateTime @default(now())
+  members        User[]   @relation("GroupToUser")
 }
 
 model LeetcodeInfo {
   id               Int     @id @default(autoincrement())
-  username         User    @relation(fields: [leetcodeUsername], references: [leetcodeUsername])
   avatar           String?
   leetcodeUsername String  @unique
   ranking          Int
@@ -46,6 +41,10 @@ model LeetcodeInfo {
   easySolved       Int
   mediumSolved     Int
   hardSolved       Int
+  contestAttended  Int?
+  contestRating    Int?
+  contestRanking   Int?
+  username         User    @relation(fields: [leetcodeUsername], references: [leetcodeUsername])
 }
 
 model UpdateQueue {

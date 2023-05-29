@@ -3,6 +3,10 @@ interface ILeetcodeUser {
   githubUrl: string | null;
   twitterUrl: string | null;
   linkedUrl: string | null;
+  contestAttended: number;
+  contestRating: number;
+  contestRanking: number;
+  contestBadge: string | null;
   profile: {
     ranking: number;
     userAvatar: string;
@@ -61,5 +65,6 @@ interface ILeetcodeUser {
     icon: string;
     hoverText: string;
   }[];
+
 }
 export default ILeetcodeUser

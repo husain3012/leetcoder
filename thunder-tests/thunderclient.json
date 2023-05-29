@@ -62,16 +62,16 @@
     "colId": "a7de6250-7640-482b-a62f-8911bb4e7a5a",
     "containerId": "",
     "name": "Leetcode Info",
-    "url": "{{host}}/api/leetcode?user=sparsh_mahajan",
+    "url": "{{host}}/api/leetcode?user=husain3012",
     "method": "GET",
     "sortNum": 10000,
     "created": "2023-05-05T11:59:05.854Z",
-    "modified": "2023-05-11T20:19:22.130Z",
+    "modified": "2023-05-25T11:56:53.320Z",
     "headers": [],
     "params": [
       {
         "name": "user",
-        "value": "sparsh_mahajan",
+        "value": "husain3012",
         "isPath": false
       }
     ],
@@ -96,11 +96,11 @@
     "colId": "4b21f778-f964-46fb-ae23-b83cb406b1af",
     "containerId": "",
     "name": "Update users",
-    "url": "{{host}}/api/update/queue?limit=5&age=10",
+    "url": "{{host}}/api/update/queue?limit=5&age=1000",
     "method": "GET",
     "sortNum": 10000,
     "created": "2023-05-07T20:23:28.294Z",
-    "modified": "2023-05-11T23:23:31.899Z",
+    "modified": "2023-05-29T17:17:18.512Z",
     "headers": [],
     "params": [
       {
@@ -110,7 +110,7 @@
       },
       {
         "name": "age",
-        "value": "10",
+        "value": "1000",
         "isPath": false
       }
     ],
@@ -121,16 +121,16 @@
     "colId": "4b21f778-f964-46fb-ae23-b83cb406b1af",
     "containerId": "",
     "name": "Update users by username",
-    "url": "{{host}}/api/update/user?username=sparsh_mahajan",
+    "url": "{{host}}/api/update/user?username=husain3012",
     "method": "GET",
     "sortNum": 20000,
     "created": "2023-05-07T22:00:00.616Z",
-    "modified": "2023-05-11T16:21:36.732Z",
+    "modified": "2023-05-29T17:15:49.263Z",
     "headers": [],
     "params": [
       {
         "name": "username",
-        "value": "sparsh_mahajan",
+        "value": "husain3012",
         "isPath": false
       }
     ],

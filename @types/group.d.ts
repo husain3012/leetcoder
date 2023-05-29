@@ -20,6 +20,9 @@ export interface IGroupMember {
   lastUpdated: Date;
   leetcodeStats: {
     ranking: number;
+    contestRanking: number;
+    contestRating: number;
+    contestAttended: number;
     streak: number;
     easySolved: number;
     mediumSolved: number;

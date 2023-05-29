@@ -9,7 +9,7 @@
     "data": [
       {
         "name": "host",
-        "value": "https://leetcoder.husainshahidrao.com"
+        "value": "http://localhost:3000"
       }
     ]
   }

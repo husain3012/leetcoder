@@ -92,25 +92,51 @@ const RankingTable = ({ users }: { users: IGroupMember[] }) => {
       // sortDirections: ["ascend", "descend"],
     },
     {
-      title: "Ranking",
-      dataIndex: "ranking",
+      title: "Contest Attended",
+      dataIndex: "contestAttended",
       defaultSortOrder: "ascend",
-      sorter: (a, b) => a.leetcodeStats?.ranking - b.leetcodeStats?.ranking,
+      sorter: (a, b) =>  a.leetcodeStats?.contestAttended - b.leetcodeStats?.contestAttended ,
       render: (v, r) =>
-        r.leetcodeStats ? r.leetcodeStats?.ranking : <QuestionOutlined />,
+        r.leetcodeStats ? r.leetcodeStats?.contestAttended : <QuestionOutlined />,
 
       align: "center",
-      width: "18%",
+      width: "10%",
     },
+
+    {
+      title: "Contest Rating",
+      dataIndex: "contestRating",
+      defaultSortOrder: "ascend",
+      sorter: (a, b) => a.leetcodeStats?.contestRating==0?1:b.leetcodeStats?.contestRating==0?-1: a.leetcodeStats?.contestRating - b.leetcodeStats?.contestRating ,
+      render: (v, r) =>
+        r.leetcodeStats?.contestRating ? r.leetcodeStats?.contestRating : <QuestionOutlined />,
+
+      align: "center",
+      width: "14%",
+    },
+  
+    
+    {
+      title: "Contest Ranking",
+      dataIndex: "contestRanking",
+      defaultSortOrder: "ascend",
+      sorter: (a, b) => a.leetcodeStats?.contestRanking==0?1:b.leetcodeStats?.contestRanking==0?-1: a.leetcodeStats?.contestRanking - b.leetcodeStats?.contestRanking ,
+      render: (v, r) =>
+        r.leetcodeStats?.contestRanking ? r.leetcodeStats?.contestRanking : <QuestionOutlined />,
+
+      align: "center",
+      width: "14%",
+    },
+  
     {
       title: "Question Solved",
-      // dataIndex: "totalSolved",
+      // dataIndex: "totalSolved",z
       sorter: (a, b) =>
         a.leetcodeStats ? getTotalSolved(a) - getTotalSolved(b) : null,
       render: (_, r) =>
         r.leetcodeStats ? getTotalSolved(r) : <QuestionOutlined />,
       align: "center",
-      width: "18%",
+      width: "10%",
       
     },
     {

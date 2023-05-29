@@ -65,7 +65,6 @@ const Group = ({ groupStats }: { groupStats: IGroup }) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  console.log(context.query);
   const group_id = Number(context.query.group_id);
   const groupStats = await getGroupStatus(group_id);
 
