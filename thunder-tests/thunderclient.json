@@ -23,16 +23,16 @@
     "colId": "afd111b2-fc41-4594-8680-223aa29d6ceb",
     "containerId": "",
     "name": "Join User",
-    "url": "{{host}}/api/groups/join/QXzkvZt8B1",
+    "url": "{{host}}/api/groups/join/q3eTrBvZBq",
     "method": "POST",
     "sortNum": 20000,
     "created": "2023-05-05T11:04:29.409Z",
-    "modified": "2023-05-12T00:12:05.755Z",
+    "modified": "2023-05-31T13:43:26.546Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"name\":\"Husain Shahid Rao\",\n  \"leetcodeUsername\": \"husain3012\",\n  \"email\" :\"hsr3012kalimg@gmail.com\"\n}",
+      "raw": "{\n  \"name\":\"hi-malik\",\n  \"leetcodeUsername\": \"hi-malik\",\n  \"email\" :\"hi-malik@gmail.com\"\n}",
       "form": []
     },
     "tests": []
