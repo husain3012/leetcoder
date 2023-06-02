@@ -8,13 +8,15 @@ const DualAxes = dynamic(
 );
 
 import React, { useEffect, useState } from "react";
-import { Card, Spin } from "antd";
+import { Card, Spin, theme } from "antd";
 
 const QuestionSolvedBar = ({ groupStats }: { groupStats: IGroup }) => {
   const [chartLoading, setChartLoading] = useState(true);
   useEffect(() => setChartLoading(true), []);
   const bar_graph_data = [];
   const line_graph_data = [];
+  const { token } = theme.useToken();
+
 
   groupStats.members.forEach((member) => {
     bar_graph_data.push({
@@ -79,9 +81,9 @@ const QuestionSolvedBar = ({ groupStats }: { groupStats: IGroup }) => {
               {
                 geometry: 'line',
                 smooth: true,
+                color: token.colorPrimary,
                 lineStyle: {
-                  lineWidth: 2,
-                  
+                  lineWidth: 2.5,
                 },
               },
             ],

@@ -4,8 +4,7 @@ import db from "../../../../db";
 import type { NextApiRequest, NextApiResponse } from "next";
 import IUser from "../../../../@types/user";
 import dayjs from "dayjs";
-import { leetcodeStats, getLeetcodeStatsToSave} from "../../../../utils/leetcode";
-
+import { leetcodeStats, getLeetcodeStatsToSave} from "../../../../utils";
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   switch (req.method) {
     case "POST":
@@ -29,6 +28,9 @@ const postHandler = async (req: NextApiRequest, res: NextApiResponse) => {
     if(initialLeetcodeDataFound.length==0) throw new ApiError(500, "Something went wrong, check your leetcode username once or try again later")
 
     const leetcodeStatsData = getLeetcodeStatsToSave(initialLeetcodeDataFound[0]);
+
+
+    
    
 
     const userToJoin = await db.user.upsert({

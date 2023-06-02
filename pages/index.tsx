@@ -22,11 +22,7 @@ import JoinGroup from "../components/JoinGroup";
 import IGroup, { IGroupMember } from "../@types/group";
 import GroupList from "../components/GroupList";
 import axios from "axios";
-import {
-  loadUserFromLocal,
-  removeUserFromLocal,
-  saveUserToLocal,
-} from "../utils";
+
 import SITE_CONFIG from "../site_config";
 import {
   CopyFilled,
@@ -39,12 +35,19 @@ import {
 } from "@ant-design/icons";
 import { useRouter } from "next/router";
 import { group } from "console";
+import { useCookies } from "react-cookie";
+import { GetServerSideProps } from "next";
+import { getUserInfo } from "../services/users/userInfo";
 
 const { Search } = Input;
 const { Text, Title } = Typography;
 const { Meta } = Card;
 
-export default function Index() {
+export default function Index({
+  loggedUser,
+}: {
+  loggedUser: IGroupMember | null;
+}) {
   const router = useRouter();
   const { token } = theme.useToken();
   const query = router.query;
@@ -52,10 +55,9 @@ export default function Index() {
   const [searchString, setSearchString] = useState("");
   const [searchResult, setSearchResult] = useState<IGroup[]>([]);
   const [searchLoading, setSearchLoading] = useState(false);
-  const [savedUserLoading, setSavedUserLoading] = useState(false);
 
   const [savedUser, setSavedUser] = useState<IGroupMember | null>(null);
-  const [openModal,setOpenModal] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
 
   const searchResultHandler = async () => {
     if (searchLoading) return;
@@ -71,41 +73,16 @@ export default function Index() {
   };
 
   useEffect(() => {
-    console.log(inviteID)
-    if(inviteID) setOpenModal(true)
-
-    const loadUser = async () => {
-      setSavedUserLoading(true);
-      try {
-        console.log("Fetching API");
-        const user = await loadUserFromLocal();
-        if (user == null) {
-          setSavedUserLoading(false);
-          return;
-        }
-        setSavedUser(user);
-      } catch (error) {
-        message.error(error.message);
-      }
-
-      setSavedUserLoading(false);
-    };
-    loadUser();
-  }, [inviteID]);
+    if (loggedUser) setSavedUser(loggedUser);
+  }, [loggedUser]);
 
   return (
     <div>
-      <Spin
-        spinning={savedUserLoading}
-        size="large"
-        indicator={<LoadingOutlined />}
-      >
-        {savedUser ? (
-          <SavedUserInfo savedUser={savedUser} setSavedUser={setSavedUser} />
-        ) : (
-          <LandingHero setSavedUser={setSavedUser} />
-        )}
-      </Spin>
+      {savedUser ? (
+        <SavedUserInfo savedUser={savedUser} setSavedUser={setSavedUser} />
+      ) : (
+        <LandingHero setSavedUser={setSavedUser} />
+      )}
       <Divider>OR</Divider>
 
       <div
@@ -128,7 +105,12 @@ export default function Index() {
           <JoinGroup />
         </Card>
       </div>
-      <Modal title="Join Group" footer={null} open={openModal} onCancel={()=>setOpenModal(false)}>
+      <Modal
+        title="Join Group"
+        footer={null}
+        open={openModal}
+        onCancel={() => setOpenModal(false)}
+      >
         {inviteID && <JoinGroup inviteID={inviteID} />}
       </Modal>
       <Divider />
@@ -154,6 +136,7 @@ const LandingHero = ({ setSavedUser }: { setSavedUser: any }) => {
   const { token } = theme.useToken();
   const [loadUserString, setLoadUserString] = useState("");
   const [loading, setLoading] = useState(false);
+  const [_cookies, setCookie] = useCookies(["leetcode-user"]);
   const loginUserHandler = async () => {
     if (loading) return;
     setLoading(true);
@@ -168,7 +151,7 @@ const LandingHero = ({ setSavedUser }: { setSavedUser: any }) => {
       }
       message.success(`Found ${loadUserString} `);
       setSavedUser(userInfo as IGroupMember);
-      saveUserToLocal(loadUserString);
+      setCookie("leetcode-user", loadUserString);
     } catch (error) {
       message.error(error.message);
     }
@@ -221,9 +204,10 @@ const SavedUserInfo = ({
   setSavedUser: any;
 }) => {
   const { token } = theme.useToken();
+  const [_cookies, _setCookie, removeCookie] = useCookies(["leetcode-user"]);
   const logoutHandler = () => {
-    removeUserFromLocal();
     setSavedUser(null);
+    removeCookie("leetcode-user");
   };
 
   return (
@@ -328,4 +312,27 @@ const GroupCard = ({ group }: { group: IGroup }) => {
       </Link>
     </Card>
   );
+};
+
+export const getServerSideProps: GetServerSideProps = async ({ req }) => {
+  const savedUser = req.cookies["leetcode-user"];
+  if (!savedUser) {
+    return {
+      props: {
+        loggedUser: null,
+      },
+    };
+  }
+  const savedUserInfo = await getUserInfo(savedUser);
+  const serializedData  = {
+    ...savedUserInfo,
+    lastAccessed: savedUserInfo.lastAccessed.toISOString(),
+    lastUpdated: savedUserInfo.lastUpdated.toISOString(),
+  }
+
+  return {
+    props: {
+      loggedUser: serializedData,
+    },
+  };
 };

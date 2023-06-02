@@ -23,14 +23,12 @@ import { IGroupMember } from "../../@types/group";
 
 import type { ColumnsType, TableProps } from "antd/es/table";
 import axios from "axios";
-import { getUsernameFromLocal } from "../../utils";
 // import { Pie } from "@ant-design/charts";
 dayjs.extend(relativeTime);
 
-const RankingTable = ({ users }: { users: IGroupMember[] }) => {
+const RankingTable = ({ users, loggedUser }: { users: IGroupMember[], loggedUser:IGroupMember }) => {
   const [usersData, setUsersData] = useState<IGroupMember[]>([]);
   const [updatingUser, setUpdatingUser] = useState("");
-  const loggedinUser = getUsernameFromLocal()
 
   const isMobile = useMediaQuery({ query: '(max-width: 956px)' })
 
@@ -61,8 +59,8 @@ const RankingTable = ({ users }: { users: IGroupMember[] }) => {
       onFilter: (value: string, record) => record.name.indexOf(value) === 0,
       sorter: (a, b) => a.name.length - b.name.length,
       render: (_, r) => (
-        <Tooltip title={r.leetcodeUsername===loggedinUser?"You":"aka " + r.name}>
-          <Space style={r.leetcodeUsername===loggedinUser?currentUserStyles:{}} >
+        <Tooltip title={r.leetcodeUsername===loggedUser?.leetcodeUsername?"You":"aka " + r.name}>
+          <Space style={r.leetcodeUsername===loggedUser?.leetcodeUsername?currentUserStyles:{}} >
 
         
 
@@ -185,7 +183,7 @@ const RankingTable = ({ users }: { users: IGroupMember[] }) => {
   return (
     <Table
     size={isMobile?"small":"middle"}
-      // rowClassName={(r, i)=>r.leetcodeUsername===loggedinUser?"rankingTable-selected":""}
+      // rowClassName={(r, i)=>r.leetcodeUsername===loggedUser?"rankingTable-selected":""}
       rowKey={(r,i)=>r.id}
       columns={columns}
       dataSource={usersData}

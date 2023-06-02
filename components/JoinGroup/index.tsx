@@ -9,31 +9,33 @@ import {
   Spin,
   message,
   theme,
-
 } from "antd";
 import Link from "next/link";
 import axios from "axios";
 import IGroup from "../../@types/group";
 import { CopyFilled, EditOutlined, SettingOutlined } from "@ant-design/icons";
 import { useRouter } from "next/router";
-import { saveUserToLocal } from "../../utils";
+import { useCookies } from "react-cookie";
 
 const { Meta } = Card;
-const {useForm} = Form;
+const { useForm } = Form;
 
-const JoinGroup = ({inviteID}:{inviteID?:string}) => {
+const JoinGroup = ({ inviteID }: { inviteID?: string }) => {
   const { token } = theme.useToken();
   const router = useRouter();
   const [joiningGroup, setJoiningGroup] = useState(false);
-  const [form] = useForm()
-  useEffect(()=>{
-    if(inviteID){
-      form.setFields([{
-        name:"invite_id",
-        value:inviteID
-      }])
+  const [form] = useForm();
+  const [_, setCookie] = useCookies(["leetcode-user"]);
+  useEffect(() => {
+    if (inviteID) {
+      form.setFields([
+        {
+          name: "invite_id",
+          value: inviteID,
+        },
+      ]);
     }
-  },[])
+  }, []);
 
   const onFinish = async (values) => {
     if (joiningGroup) return;
@@ -51,17 +53,17 @@ const JoinGroup = ({inviteID}:{inviteID?:string}) => {
       message.success(
         `${values.leetcodeUsername}  joined group'${joinedGroup.data.name}'!`
       );
-      saveUserToLocal(values.leetcodeUsername)
+      setCookie("leetcode-user", values.leetcodeUsername);
       router.replace(`/groups/${joinedGroup.data.id}`);
     } catch (error) {
-        console.log(error)
+      console.log(error);
       message.error(error.message);
     }
     setJoiningGroup(false);
   };
   return (
     <Form
-    form={form}
+      form={form}
       disabled={joiningGroup}
       labelCol={{ span: 12 }}
       // style={{ width: 256 }}
@@ -106,7 +108,7 @@ const JoinGroup = ({inviteID}:{inviteID?:string}) => {
         <Input type="email" />
       </Form.Item>
 
-      <Form.Item  style={{textAlign:"center"}}>
+      <Form.Item style={{ textAlign: "center" }}>
         <Button
           disabled={joiningGroup}
           loading={joiningGroup}

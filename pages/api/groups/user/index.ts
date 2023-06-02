@@ -1,8 +1,8 @@
-import { nanoid } from "nanoid";
-import db from "../../../../db";
+
 import type { NextApiRequest, NextApiResponse } from "next";
 import { ApiError } from "next/dist/server/api-utils";
 import RequestError from "../../../../errors";
+import { getUserInfo } from "../../../../services/users/userInfo";
 
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -23,26 +23,9 @@ const getHandler = async (req: NextApiRequest, res: NextApiResponse) => {
 
 
   try {
-    const groups = await db.user.findUnique({
-      where: {
-       leetcodeUsername: lcUsername
-      },
-      include:{
-        groups:{
-            select:{
-                coverPhoto:true,
-                description:true,
-                id:true,
-                name:true,
-                _count:true,
+    const groups = await getUserInfo(lcUsername)
+    
 
-            }
-        },
-        leetcodeStats: true
-      },
-      
-     
-    });
     return res.send(groups);
   } catch (error) {
     console.log(error);
