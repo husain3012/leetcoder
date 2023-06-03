@@ -32,6 +32,7 @@ const SiteLayout = (props) => {
         flexFlow: "column",
         minHeight: "100vh",
         width: "100vw",
+        overflowX:"hidden"
       }}
     >
      

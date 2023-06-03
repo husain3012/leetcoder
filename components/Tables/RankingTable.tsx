@@ -99,6 +99,7 @@ const RankingTable = ({ users, loggedUser }: { users: IGroupMember[], loggedUser
 
       align: "center",
       width: "10%",
+      
     },
 
     {
@@ -111,6 +112,8 @@ const RankingTable = ({ users, loggedUser }: { users: IGroupMember[], loggedUser
 
       align: "center",
       width: "14%",
+      responsive: ["sm"]
+
     },
   
     

@@ -151,7 +151,7 @@ const LandingHero = ({ setSavedUser }: { setSavedUser: any }) => {
       }
       message.success(`Found ${loadUserString} `);
       setSavedUser(userInfo as IGroupMember);
-      setCookie("leetcode-user", loadUserString);
+      setCookie("leetcode-user", loadUserString, {path:"/", maxAge:31536000});
     } catch (error) {
       message.error(error.message);
     }
