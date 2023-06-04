@@ -56,7 +56,7 @@ const QuestionSolvedBar = ({ groupStats }: { groupStats: IGroup }) => {
                 isStack: true,
                 seriesField: 'type',
                 color: ["#FF375F", "#FFC01E", "#00B8A3"],
-                label: {
+              label: {
                   // 可手动配置 label 数据标签位置
                   position: "middle",
                   // 'top', 'bottom', 'middle'

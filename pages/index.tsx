@@ -52,6 +52,7 @@ export default function Index({
   const { token } = theme.useToken();
   const query = router.query;
   const inviteID = query.invite_id as string;
+  console.log(inviteID)
   const [searchString, setSearchString] = useState("");
   const [searchResult, setSearchResult] = useState<IGroup[]>([]);
   const [searchLoading, setSearchLoading] = useState(false);
@@ -74,7 +75,8 @@ export default function Index({
 
   useEffect(() => {
     if (loggedUser) setSavedUser(loggedUser);
-  }, [loggedUser]);
+    if(inviteID) setOpenModal(true)
+  }, [loggedUser, inviteID]);
 
   return (
     <div>
