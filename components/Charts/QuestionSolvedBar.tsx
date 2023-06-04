@@ -12,7 +12,6 @@ import { Card, Spin, theme } from "antd";
 
 const QuestionSolvedBar = ({ groupStats }: { groupStats: IGroup }) => {
   const [chartLoading, setChartLoading] = useState(true);
-  useEffect(() => setChartLoading(true), []);
   const bar_graph_data = [];
   const line_graph_data = [];
   const { token } = theme.useToken();
