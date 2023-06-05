@@ -44,12 +44,12 @@ const QuestionSolvedBar = ({ groupStats }: { groupStats: IGroup }) => {
     })
   });
   return (
-    <Card style={{ overflowX: "auto" }} title="Questions Solved Chart">
+    <Card style={{ overflowX: "auto" }} title="Questions Solved Chart (Top 10)">
         <Spin spinning={chartLoading}>
         <DualAxes
           {...{
             onReady : ()=>setChartLoading(false),
-            data: [bar_graph_data, line_graph_data],
+            data: [bar_graph_data.slice(0,10), line_graph_data.slice(0,10)],
             geometryOptions: [
               {
                 geometry: 'column',
