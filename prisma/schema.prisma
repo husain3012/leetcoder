@@ -22,13 +22,14 @@ model User {
 }
 
 model Group {
-  id             Int      @id @default(autoincrement())
-  name           String   @unique
+  id             Int      @id @default(autoincrement()) 
+  name           String   
   description    String?
   coverPhoto     String?
   createdByEmail String
   inviteID       String   @unique
   lastAccessed   DateTime @default(now())
+  urlSlug        String   @unique
   members        User[]   @relation("GroupToUser")
 }
 
@@ -47,8 +48,3 @@ model LeetcodeInfo {
   username         User    @relation(fields: [leetcodeUsername], references: [leetcodeUsername])
 }
 
-model UpdateQueue {
-  id       Int      @id @default(autoincrement())
-  inTime   DateTime
-  username String   @unique
-}

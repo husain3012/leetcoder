@@ -34,6 +34,7 @@ const CreateGroup = () => {
         description: values.description,
         createdByEmail: values.createdByEmail,
         coverPhoto: values.coverPhoto,
+        urlSlug : values.urlSlug
       });
 
       message.success(`Group '${createdGroup.data.name}' created!`);
@@ -64,6 +65,16 @@ const CreateGroup = () => {
           >
             <Input />
           </Form.Item>
+          <Form.Item
+            label="URL Slug"
+            name="urlSlug"
+            rules={[
+              { required: true, message: "Please input a tag (url slug)!" },
+            ]}
+          >
+            <Input addonBefore="/groups/" placeholder="leetcoders-69" />
+          </Form.Item>
+
 
           <Form.Item
             label="Your Email"

@@ -16,6 +16,6 @@
     "incremental": true,
     "outDir": "./",
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "prisma/seed.ts", "prisma/seed_data.js", "prisma/scripts/migrate-contest-ranking.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "prisma/seed.ts", "prisma/seed_data.js", "prisma/scripts/migrate-contest-ranking.js", "scripts/backup.js"],
   "exclude": ["node_modules", "modules"]
 }

@@ -271,7 +271,7 @@ const GroupCard = ({ group }: { group: IGroup }) => {
       clearTimeout(copyTimeout);
       setCopied(false);
     }
-    await navigator.clipboard.writeText(`${window.origin}/groups/${group.id}`);
+    await navigator.clipboard.writeText(`${window.origin}/groups/${group.urlSlug}`);
     setCopied(true);
     copyTimeout = setTimeout(() => {
       setCopied(false);
@@ -284,7 +284,7 @@ const GroupCard = ({ group }: { group: IGroup }) => {
       cover={
         <img
           style={{ cursor: "pointer", objectFit: "cover", height: 156 }}
-          onClick={() => router.push(`/groups/${group.id}`)}
+          onClick={() => router.push(`/groups/${group.urlSlug}`)}
           alt="cover photo"
           src={group.coverPhoto}
         />
@@ -303,7 +303,7 @@ const GroupCard = ({ group }: { group: IGroup }) => {
         </Space>,
       ]}
     >
-      <Link href={`/groups/${group.id}`}>
+      <Link href={`/groups/${group.urlSlug}`}>
         <Meta
           avatar={<Avatar src={SITE_CONFIG.leetcode_logo} />}
           title={`${group.name}`}

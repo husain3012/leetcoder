@@ -18,17 +18,18 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 };
 
 const postHandler = async (req: NextApiRequest, res: NextApiResponse) => {
-  const { name, coverPhoto, description, createdByEmail }: IGroup = req.body;
+  const { name, coverPhoto, description, createdByEmail, urlSlug}: IGroup = req.body;
+
 
   const existingGroup = await db.group.findFirst({
     where: {
-      name,
+      urlSlug,
     },
   });
 
   if (existingGroup) {
     return res.status(502).send({
-      message: "Group already exists!",
+      message: "URL Slug already in use!",
     });
   }
 
@@ -40,6 +41,7 @@ const postHandler = async (req: NextApiRequest, res: NextApiResponse) => {
         coverPhoto: coverPhoto || SITE_CONFIG.defaultCoverPhotos[Math.floor(Math.random()*SITE_CONFIG.defaultCoverPhotos.length)],
         createdByEmail,
         inviteID: nanoid(10),
+        urlSlug: urlSlug
       },
     });
 

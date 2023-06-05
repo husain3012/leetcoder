@@ -3,7 +3,8 @@
   "scripts": {
     "dev": "next",
     "build": "prisma generate && next build",
-    "start": "next start"
+    "start": "next start",
+    "backup": "node scripts/backup.js"
   },
   "dependencies": {
     "@ant-design/charts": "^1.4.2",

@@ -6,6 +6,7 @@ interface IGroup {
   createdByEmail: string;
   members?: IGroupMember[];
   inviteID?: string;
+  urlSlug: string;
   _count?:{
     members: number;
   }

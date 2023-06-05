@@ -1,9 +1,9 @@
 import db from "../../db";
 
-export const getGroupStatus = async (group_id: number) => {
+export const getGroupStatus = async (group_tag: string) => {
   return await db.group.findUnique({
     where: {
-      id: group_id,
+      urlSlug:group_tag
     },
     select: {
       name: true,
@@ -27,7 +27,6 @@ export const getGroupStatus = async (group_id: number) => {
           },
         },
       },
-      
     },
   });
 };

@@ -22,11 +22,11 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
 const getHandler = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
-    if (!req.query.group_id) throw new ApiError(401, "Group ID Required");
+    if (!req.query.tag) throw new ApiError(401, "Group ID Required");
 
-    const group_id = Number(req.query.group_id);
+    const group_tag = req.query.tag as string;
 
-    const group = await getGroupStatus(group_id);
+    const group = await getGroupStatus(group_tag);
 
 
 
