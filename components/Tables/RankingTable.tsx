@@ -92,8 +92,8 @@ const RankingTable = ({ users, loggedUser }: { users: IGroupMember[], loggedUser
     {
       title: "Contest Attended",
       dataIndex: "contestAttended",
-      defaultSortOrder: "ascend",
       sorter: (a, b) =>  a.leetcodeStats?.contestAttended - b.leetcodeStats?.contestAttended ,
+      
       render: (v, r) =>
         r.leetcodeStats ? r.leetcodeStats?.contestAttended : <QuestionOutlined />,
 
@@ -105,7 +105,7 @@ const RankingTable = ({ users, loggedUser }: { users: IGroupMember[], loggedUser
     {
       title: "Contest Rating",
       dataIndex: "contestRating",
-      defaultSortOrder: "ascend",
+      
       sorter: (a, b) => a.leetcodeStats?.contestRating==0?1:b.leetcodeStats?.contestRating==0?-1: a.leetcodeStats?.contestRating - b.leetcodeStats?.contestRating ,
       render: (v, r) =>
         r.leetcodeStats?.contestRating ? r.leetcodeStats?.contestRating : <QuestionOutlined />,
