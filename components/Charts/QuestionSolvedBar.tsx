@@ -49,7 +49,7 @@ const QuestionSolvedBar = ({ groupStats }: { groupStats: IGroup }) => {
         <DualAxes
           {...{
             onReady : ()=>setChartLoading(false),
-            data: [bar_graph_data.slice(0,10), line_graph_data.slice(0,10)],
+            data: [bar_graph_data.slice(0,30), line_graph_data.slice(0,10)],
             geometryOptions: [
               {
                 geometry: 'column',
