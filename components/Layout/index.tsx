@@ -21,7 +21,8 @@ const SiteLayout = (props) => {
     });
 
     Router.events.on("routeChangeError", () => {
-      message.error("Error loading page!");
+      
+      console.log("Error loading page!");
       setIsLoading(false);
     });
   }, [Router]);

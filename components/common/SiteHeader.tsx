@@ -6,13 +6,13 @@ const SiteHeader = () => {
   const { token } = theme.useToken();
   return (
     <header>
-      <Link href={"/"}>
         <h1>
+      <Link href={"/"}>
           <span style={{ color: token.colorPrimary }}>Leet</span>
           <span style={{ color: token.colorWhite }}>coder</span>
           <span style={{ color: token.colorPrimary }}>!</span>
-        </h1>
       </Link>
+        </h1>
     </header>
   );
 };

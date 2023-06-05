@@ -135,7 +135,10 @@ const RankingTable = ({ users, loggedUser }: { users: IGroupMember[], loggedUser
       sorter: (a, b) =>
         a.leetcodeStats ? getTotalSolved(a) - getTotalSolved(b) : null,
       render: (_, r) =>
-        r.leetcodeStats ? getTotalSolved(r) : <QuestionOutlined />,
+      <Tooltip title={`${r.leetcodeStats.easySolved}E, ${r.leetcodeStats.mediumSolved}M, ${r.leetcodeStats.hardSolved}H`}>
+{ r.leetcodeStats ? getTotalSolved(r) : <QuestionOutlined />}
+      </Tooltip>
+       ,
       align: "center",
       width: "10%",
       
