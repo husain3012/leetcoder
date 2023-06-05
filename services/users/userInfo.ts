@@ -11,6 +11,7 @@ export const getUserInfo = async (leetcodeUsername:string) => {
                   coverPhoto:true,
                   description:true,
                   id:true,
+                  urlSlug:true,
                   name:true,
                   _count:true,
   
