@@ -10,7 +10,7 @@ const GroupList = ({ groupList }: { groupList: IGroup[] }) => {
         itemLayout="horizontal"
         dataSource={groupList}
         renderItem={(item, index) => (
-          <List.Item extra={<Button type="dashed" ><Link href={`/groups/${item.id}`}>Show</Link></Button>}>
+          <List.Item extra={<Button type="dashed" ><Link href={`/groups/${item.urlSlug}`}>Open</Link></Button>}>
             <List.Item.Meta
               avatar={<Avatar src={item.coverPhoto} />}
               title={item.name}
