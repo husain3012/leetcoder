@@ -41,6 +41,8 @@ const JoinGroup = ({ inviteID }: { inviteID?: string }) => {
     if (joiningGroup) return;
     setJoiningGroup(true);
     try {
+      const warmup_db = await axios.post("/api/others/warmup_prisma")
+      console.log(warmup_db.data?.message)
       const joinedGroup = await axios.post(
         `/api/groups/join/${values.invite_id}`,
         {

@@ -1,8 +1,11 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import db from "../../../db";
+import {initializeDB} from "../../../db";
 import dayjs from "dayjs";
 import { getLeetcodeStatsToSave, leetcodeStats } from "../../../utils/leetcode";
 import { ApiError } from "next/dist/server/api-utils";
+
+
+const db = initializeDB();
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   try {

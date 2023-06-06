@@ -32,7 +32,6 @@ export const parseHTML = (html_string)  : any[]=> {
     const contestRanking = parseInt(html_string.split(globalRankingStart)[1]?.split(globalRankingEnd)[0]?.replace(/,/g, '')) || 0;
 
     const contestInfo = {contestAttended, contestRating, contestRanking}
-    console.log(contestInfo)
 
     
     useFullData.push(contestInfo)

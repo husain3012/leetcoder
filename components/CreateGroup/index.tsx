@@ -120,7 +120,7 @@ const CreateGroup = () => {
             description={
               <div>
                 <Link
-                  href={`/groups/${groupCreated.id}`}
+                  href={`/groups/${groupCreated.urlSlug}`}
                   target="_blank"
                   rel="noreferrer"
                 >Group Link</Link>

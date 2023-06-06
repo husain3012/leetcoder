@@ -3,8 +3,12 @@ import SiteLayout from "../components/Layout";
 import { ConfigProvider, theme } from "antd";
 import { CookiesProvider } from "react-cookie";
 import "../global.css";
+import { initializeDB } from "../db";
 
 const MyApp = ({ Component, pageProps }) => {
+  if (typeof window === "undefined") {
+    initializeDB();
+  }
   return (
     <>
       <CookiesProvider>

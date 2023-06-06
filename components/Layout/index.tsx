@@ -5,7 +5,8 @@ import Router from "next/router";
 import SITE_CONFIG from "../../site_config";
 import Link from "next/link";
 import { BarLoader } from "react-spinners";
-const { Header, Footer, Sider, Content } = Layout;
+import { GithubOutlined } from "@ant-design/icons";
+const { Header, Footer, Content } = Layout;
 
 const SiteLayout = (props) => {
   const { token } = theme.useToken();
@@ -64,7 +65,7 @@ const SiteLayout = (props) => {
       </Content>
       <Footer style={{ textAlign: "center", marginTop: "auto" }}>
         <Link href={SITE_CONFIG.repoURL} target="_blank" rel="noreferrer">
-          Source Code
+          Contribute on <GithubOutlined/>
         </Link>
       </Footer>
     </div>

@@ -1,4 +1,7 @@
-import db from "../../db";
+import {initializeDB} from "../../db";
+
+
+const db = initializeDB();
 
 export const getGroupStatus = async (group_tag: string) => {
   return await db.group.findUnique({

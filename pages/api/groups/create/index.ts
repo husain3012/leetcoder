@@ -1,9 +1,12 @@
 import { nanoid } from "nanoid";
-import db from "../../../../db";
+import {initializeDB} from "../../../../db";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { ApiError } from "next/dist/server/api-utils";
 import IGroup from "../../../../@types/group";
 import SITE_CONFIG from "../../../../site_config";
+
+const db = initializeDB();
+
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   switch (req.method) {
     case "POST":

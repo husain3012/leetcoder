@@ -1,4 +1,7 @@
-import db from "../../db";
+import {initializeDB} from "../../db";
+
+
+const db = initializeDB();
 
 export const getUserInfo = async (leetcodeUsername:string) => {
     const groups = await db.user.findUnique({

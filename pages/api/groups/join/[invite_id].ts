@@ -1,10 +1,13 @@
 import { nanoid } from "nanoid";
 import { ApiError } from "next/dist/server/api-utils";
-import db from "../../../../db";
+import {initializeDB} from "../../../../db";
 import type { NextApiRequest, NextApiResponse } from "next";
 import IUser from "../../../../@types/user";
 import dayjs from "dayjs";
 import { leetcodeStats, getLeetcodeStatsToSave} from "../../../../utils";
+const db  = initializeDB();
+
+
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   switch (req.method) {
     case "POST":
@@ -30,7 +33,7 @@ const postHandler = async (req: NextApiRequest, res: NextApiResponse) => {
     const leetcodeStatsData = getLeetcodeStatsToSave(initialLeetcodeDataFound[0]);
 
 
-    
+
    
 
     const userToJoin = await db.user.upsert({

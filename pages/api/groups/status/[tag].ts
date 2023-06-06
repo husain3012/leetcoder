@@ -1,11 +1,13 @@
 import { nanoid } from "nanoid";
-import db from "../../../../db";
+import {initializeDB} from "../../../../db";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 import { ApiError } from "next/dist/server/api-utils";
 
 import RequestError from "../../../../errors";
 import { getGroupStatus } from "../../../../services/groups/status";
+
+const db = initializeDB();
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   switch (req.method) {
