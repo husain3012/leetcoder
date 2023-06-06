@@ -42,7 +42,8 @@ const getHandler = async (req: NextApiRequest, res: NextApiResponse) => {
         description: true,
         coverPhoto: true,
         inviteID: false,
-        _count:true
+        _count:true,
+        urlSlug: true,
       },
      
     });
