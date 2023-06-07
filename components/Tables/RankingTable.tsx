@@ -23,6 +23,7 @@ import { IGroupMember } from "../../@types/group";
 
 import type { ColumnsType, TableProps } from "antd/es/table";
 import axios from "axios";
+import { warmup_prisma } from "../../utils";
 // import { Pie } from "@ant-design/charts";
 dayjs.extend(relativeTime);
 
@@ -36,6 +37,7 @@ const RankingTable = ({ users, loggedUser }: { users: IGroupMember[], loggedUser
     if (updatingUser != "") return;
     setUpdatingUser(username);
     try {
+      await warmup_prisma();
       const updatedUser = (
         await axios.post(`/api/update/user?username=${username}`)
       ).data as IGroupMember;

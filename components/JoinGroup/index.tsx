@@ -16,8 +16,8 @@ import IGroup from "../../@types/group";
 import { CopyFilled, EditOutlined, SettingOutlined } from "@ant-design/icons";
 import { useRouter } from "next/router";
 import { useCookies } from "react-cookie";
+import { warmup_prisma } from "../../utils";
 
-const { Meta } = Card;
 const { useForm } = Form;
 
 const JoinGroup = ({ inviteID }: { inviteID?: string }) => {
@@ -41,8 +41,7 @@ const JoinGroup = ({ inviteID }: { inviteID?: string }) => {
     if (joiningGroup) return;
     setJoiningGroup(true);
     try {
-      const warmup_db = await axios.post("/api/others/warmup_prisma")
-      console.log(warmup_db.data?.message)
+      await warmup_prisma();
       const joinedGroup = await axios.post(
         `/api/groups/join/${values.invite_id}`,
         {
