@@ -24,14 +24,24 @@ import { IGroupMember } from "../../@types/group";
 import type { ColumnsType, TableProps } from "antd/es/table";
 import axios from "axios";
 import { warmup_prisma } from "../../utils";
+import dynamic from "next/dynamic";
+const Pie = dynamic(() => import("@ant-design/charts").then(({ Pie }) => Pie), {
+  ssr: false,
+});
 // import { Pie } from "@ant-design/charts";
 dayjs.extend(relativeTime);
 
-const RankingTable = ({ users, loggedUser }: { users: IGroupMember[], loggedUser:IGroupMember }) => {
+const RankingTable = ({
+  users,
+  loggedUser,
+}: {
+  users: IGroupMember[];
+  loggedUser: IGroupMember;
+}) => {
   const [usersData, setUsersData] = useState<IGroupMember[]>([]);
   const [updatingUser, setUpdatingUser] = useState("");
 
-  const isMobile = useMediaQuery({ query: '(max-width: 956px)' })
+  const isMobile = useMediaQuery({ query: "(max-width: 956px)" });
 
   const updatedUserHandler = async (username) => {
     if (updatingUser != "") return;
@@ -50,9 +60,9 @@ const RankingTable = ({ users, loggedUser }: { users: IGroupMember[], loggedUser
     setUpdatingUser("");
   };
 
-  const currentUserStyles : CSSProperties = {
-    fontWeight: 'bolder',
-  }
+  const currentUserStyles: CSSProperties = {
+    fontWeight: "bolder",
+  };
 
   const columns: ColumnsType<IGroupMember> = [
     {
@@ -61,30 +71,39 @@ const RankingTable = ({ users, loggedUser }: { users: IGroupMember[], loggedUser
       onFilter: (value: string, record) => record.name.indexOf(value) === 0,
       sorter: (a, b) => a.name.length - b.name.length,
       render: (_, r) => (
-        <Tooltip title={r.leetcodeUsername===loggedUser?.leetcodeUsername?"You":"aka " + r.name}>
-          <Space style={r.leetcodeUsername===loggedUser?.leetcodeUsername?currentUserStyles:{}} >
-
-        
-
-          {
-            !isMobile && <>
-              {r.leetcodeStats?.avatar ? (
-            <Avatar  src={r.leetcodeStats?.avatar} />
-          ) : (
-            <Avatar >{r.name[0].toUpperCase()}</Avatar>
-          )}
-          <Divider type="vertical"  /></>
+        <Tooltip
+          title={
+            r.leetcodeUsername === loggedUser?.leetcodeUsername
+              ? "You"
+              : "aka " + r.name
           }
+        >
+          <Space
+            style={
+              r.leetcodeUsername === loggedUser?.leetcodeUsername
+                ? currentUserStyles
+                : {}
+            }
+          >
+            {!isMobile && (
+              <>
+                {r.leetcodeStats?.avatar ? (
+                  <Avatar src={r.leetcodeStats?.avatar} />
+                ) : (
+                  <Avatar>{r.name[0].toUpperCase()}</Avatar>
+                )}
+                <Divider type="vertical" />
+              </>
+            )}
 
-          <Link
-            href={`https://leetcode.com/${r.leetcodeUsername}`}
-            target="_blank"
-            rel="noreferrer"
-            
+            <Link
+              href={`https://leetcode.com/${r.leetcodeUsername}`}
+              target="_blank"
+              rel="noreferrer"
             >
-            {r.leetcodeUsername}
-          </Link>
-            </Space>
+              {r.leetcodeUsername}
+            </Link>
+          </Space>
         </Tooltip>
       ),
       width: "20%",
@@ -94,56 +113,88 @@ const RankingTable = ({ users, loggedUser }: { users: IGroupMember[], loggedUser
     {
       title: "Contest Attended",
       dataIndex: "contestAttended",
-      sorter: (a, b) =>  a.leetcodeStats?.contestAttended - b.leetcodeStats?.contestAttended ,
-      
+      sorter: (a, b) =>
+        a.leetcodeStats?.contestAttended - b.leetcodeStats?.contestAttended,
+
       render: (v, r) =>
-        r.leetcodeStats ? r.leetcodeStats?.contestAttended : <QuestionOutlined />,
+        r.leetcodeStats ? (
+          r.leetcodeStats?.contestAttended
+        ) : (
+          <QuestionOutlined />
+        ),
 
       align: "center",
       width: "10%",
-      
     },
 
     {
       title: "Contest Rating",
       dataIndex: "contestRating",
-      
-      sorter: (a, b) => a.leetcodeStats?.contestRating==0?1:b.leetcodeStats?.contestRating==0?-1: a.leetcodeStats?.contestRating - b.leetcodeStats?.contestRating ,
+
+      sorter: (a, b) =>
+        a.leetcodeStats?.contestRating == 0
+          ? 1
+          : b.leetcodeStats?.contestRating == 0
+          ? -1
+          : a.leetcodeStats?.contestRating - b.leetcodeStats?.contestRating,
       render: (v, r) =>
-        r.leetcodeStats?.contestRating ? r.leetcodeStats?.contestRating : <QuestionOutlined />,
+        r.leetcodeStats?.contestRating ? (
+          r.leetcodeStats?.contestRating
+        ) : (
+          <QuestionOutlined />
+        ),
 
       align: "center",
       width: "14%",
-      responsive: ["sm"]
-
+      responsive: ["sm"],
     },
-  
-    
+
     {
       title: "Contest Ranking",
       dataIndex: "contestRanking",
       defaultSortOrder: "ascend",
-      sorter: (a, b) => a.leetcodeStats?.contestRanking==0?1:b.leetcodeStats?.contestRanking==0?-1: a.leetcodeStats?.contestRanking - b.leetcodeStats?.contestRanking ,
+      sorter: (a, b) =>
+        a.leetcodeStats?.contestRanking == 0
+          ? 1
+          : b.leetcodeStats?.contestRanking == 0
+          ? -1
+          : a.leetcodeStats?.contestRanking - b.leetcodeStats?.contestRanking,
       render: (v, r) =>
-        r.leetcodeStats?.contestRanking ? r.leetcodeStats?.contestRanking : <QuestionOutlined />,
+        r.leetcodeStats?.contestRanking ? (
+          r.leetcodeStats?.contestRanking
+        ) : (
+          <QuestionOutlined />
+        ),
 
       align: "center",
       width: "14%",
     },
-  
+
     {
       title: "Question Solved",
       // dataIndex: "totalSolved",z
       sorter: (a, b) =>
         a.leetcodeStats ? getTotalSolved(a) - getTotalSolved(b) : null,
       render: (_, r) =>
-      <Tooltip title={`${r.leetcodeStats.easySolved}E, ${r.leetcodeStats.mediumSolved}M, ${r.leetcodeStats.hardSolved}H`}>
-{ r.leetcodeStats ? getTotalSolved(r) : <QuestionOutlined />}
-      </Tooltip>
-       ,
+      getTotalSolved(r) ? (
+          <Tooltip
+            title={`${r.leetcodeStats.easySolved}E, ${r.leetcodeStats.mediumSolved}M, ${r.leetcodeStats.hardSolved}H`}
+          >
+            <Space>
+
+            {isMobile ? (
+              getTotalSolved(r)
+            ) : (
+              <QuestionSolvedPie leetcodeUser={r} />
+            )}
+            </Space>
+
+          </Tooltip>
+        ) : (
+          <QuestionOutlined />
+        ),
       align: "center",
       width: "10%",
-      
     },
     {
       title: "Max Streak",
@@ -152,8 +203,8 @@ const RankingTable = ({ users, loggedUser }: { users: IGroupMember[], loggedUser
       render: (_, r) =>
         r.leetcodeStats ? r.leetcodeStats?.streak : <QuestionOutlined />,
       align: "center",
-      width: "18%",
-      responsive: ["sm"]
+      width: "12%",
+      responsive: ["sm"],
     },
     {
       title: "Last Updated",
@@ -162,9 +213,8 @@ const RankingTable = ({ users, loggedUser }: { users: IGroupMember[], loggedUser
         dayjs(a.lastUpdated).toDate().getTime() -
         dayjs(b.lastUpdated).toDate().getTime(),
       render: (_, r) => dayjs().to(dayjs(r.lastUpdated)),
-      width: "16&",
-      responsive: ["sm"]
-
+      width: "15%",
+      responsive: ["sm"],
     },
     {
       title: "Update",
@@ -179,8 +229,7 @@ const RankingTable = ({ users, loggedUser }: { users: IGroupMember[], loggedUser
         />
       ),
       width: "10%",
-      responsive: ["sm"]
-
+      responsive: ["sm"],
     },
   ];
 
@@ -190,9 +239,9 @@ const RankingTable = ({ users, loggedUser }: { users: IGroupMember[], loggedUser
 
   return (
     <Table
-    size={isMobile?"small":"middle"}
+      size={isMobile ? "small" : "middle"}
       // rowClassName={(r, i)=>r.leetcodeUsername===loggedUser?"rankingTable-selected":""}
-      rowKey={(r,i)=>r.id}
+      rowKey={(r, i) => r.id}
       columns={columns}
       dataSource={usersData}
       pagination={{
@@ -203,9 +252,62 @@ const RankingTable = ({ users, loggedUser }: { users: IGroupMember[], loggedUser
 };
 
 const getTotalSolved = (leetcodeUser: IGroupMember) => {
-  if (leetcodeUser.leetcodeStats == null) return null;
+  if (leetcodeUser.leetcodeStats == null) return 0;
   const { easySolved, mediumSolved, hardSolved } = leetcodeUser.leetcodeStats;
   return easySolved + mediumSolved + hardSolved;
+};
+
+const QuestionSolvedPie = ({
+  leetcodeUser,
+}: {
+  leetcodeUser: IGroupMember;
+}) => {
+  const { token } = theme.useToken();
+
+  const data = [
+    {
+      type: "Easy",
+      value: leetcodeUser.leetcodeStats.easySolved,
+      color: token.colorSuccess,
+    },
+    {
+      type: "Medium",
+      value: leetcodeUser.leetcodeStats.mediumSolved,
+      color: token.colorWarning,
+    },
+    {
+      type: "Hard",
+      value: leetcodeUser.leetcodeStats.hardSolved,
+      color: token.colorError,
+    },
+  ];
+  return (
+    <Pie
+      data={data}
+      angleField="value"
+      colorField="type"
+      color={[token.colorSuccess, token.colorWarning, token.colorError]}
+      radius={1}
+      innerRadius={0.8}
+      height={50}
+      width={100}
+      pieStyle={{lineWidth:0}}
+      interactions={[]}
+      legend={false}
+      label={false}
+      tooltip={false}
+      statistic={{
+        content: {
+          style: {
+            fontSize: "1em",
+            color: token.colorWhite,
+            fontWeight: "normal",
+          },
+        },
+        title: false,
+      }}
+    />
+  );
 };
 
 export default RankingTable;

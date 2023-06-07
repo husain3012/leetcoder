@@ -8,6 +8,9 @@ const SITE_CONFIG = {
         "https://images.unsplash.com/photo-1605379399843-5870eea9b74e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1198&q=80"
     ],
     leetcode_logo: "https://leetcode.com/static/images/LeetCode_logo_rvs.png",
+    totalEasyQuestion : 683,
+    totalMediumQuestion : 1442,
+    totalHardQuestion : 602,
     
 
 }

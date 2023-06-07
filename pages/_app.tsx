@@ -22,7 +22,7 @@ const MyApp = ({ Component, pageProps }) => {
               colorBgBase: "#1a1a1a",
               colorSuccess: "#00B8A3",
               colorWarning: "#FFC01E",
-              colorError: "#FFC01E",
+              colorError: "#FF375F",
             },
 
             algorithm: theme.darkAlgorithm,
