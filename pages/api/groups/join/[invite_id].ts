@@ -1,10 +1,10 @@
-import { nanoid } from "nanoid";
 import { ApiError } from "next/dist/server/api-utils";
 import {initializeDB} from "../../../../db";
 import type { NextApiRequest, NextApiResponse } from "next";
 import IUser from "../../../../@types/user";
 import dayjs from "dayjs";
-import { leetcodeStats, getLeetcodeStatsToSave} from "../../../../utils";
+import { getLeetcodeStatsToSave} from "../../../../utils";
+import { getLCAccount } from "leetcode-public-api";
 const db  = initializeDB();
 
 
@@ -27,10 +27,10 @@ const postHandler = async (req: NextApiRequest, res: NextApiResponse) => {
 
   try {
 
-    const initialLeetcodeDataFound =  await leetcodeStats([leetcodeUsername]);
-    if(initialLeetcodeDataFound.length==0) throw new ApiError(500, "Something went wrong, check your leetcode username once or try again later")
+    const initialLeetcodeDataFound =  await getLCAccount(leetcodeUsername);
+    if(initialLeetcodeDataFound.status==404) throw new ApiError(500, "Something went wrong, check your leetcode username once or try again later")
 
-    const leetcodeStatsData = getLeetcodeStatsToSave(initialLeetcodeDataFound[0]);
+    const leetcodeStatsData = getLeetcodeStatsToSave(initialLeetcodeDataFound.data);
 
 
 

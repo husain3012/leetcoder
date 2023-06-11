@@ -2348,6 +2348,11 @@ lazy-cache@^1.0.3:
   resolved "https://registry.yarnpkg.com/lazy-cache/-/lazy-cache-1.0.4.tgz#a1d78fc3a50474cb80845d3b3b6e1da49a446e8e"
   integrity sha512-RE2g0b5VGZsOCFOCgP7omTRYFqydmZkBwl5oNnQ1lDYC57uyO9KqNnNVxT7COSHTxrRCWVcAVOcbjk+tvh/rgQ==
 
+leetcode-public-api@^1.0.9:
+  version "1.0.9"
+  resolved "https://registry.yarnpkg.com/leetcode-public-api/-/leetcode-public-api-1.0.9.tgz#1f61582aeecd1cb2d5a20319ae2da98837af9421"
+  integrity sha512-SABLKXEUUMGBiF8FWmx2Buc0BcIO3ajLzgBWyfywMcdp8dxrXooyrN89ZUCT6Lk4b96BXXBe2BQcP1K5HfBDtg==
+
 lodash-es@^4.17.15, lodash-es@^4.17.21:
   version "4.17.21"
   resolved "https://registry.yarnpkg.com/lodash-es/-/lodash-es-4.17.21.tgz#43e626c46e6591b7750beb2b50117390c609e3ee"
