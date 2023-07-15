@@ -65,7 +65,9 @@ export default function Index({
 
     setSearchLoading(true);
     try {
-      const res = await axios.get(`/api/groups/search?name=${searchString}`);
+      const res = await axios.get(
+        `/api/groups/search?name=${searchString.trim()}`
+      );
       setSearchResult(res.data);
     } catch (error) {
       console.log(error);
@@ -87,28 +89,24 @@ export default function Index({
       )}
       <Divider>OR</Divider>
 
-      <Card
-        style={{ margin: "2em auto", width:"fit-content" }}
-      >
-    
-          <Tabs
+      <Card style={{ margin: "2em auto", width: "fit-content" }}>
+        <Tabs
           centered
-            type="card"
-            items={[
-              {
-                label: "Create Group",
-                children: <CreateGroup />,
+          type="card"
+          items={[
+            {
+              label: "Create Group",
+              children: <CreateGroup />,
 
-                key: "1",
-              },
-              {
-                label: "Join Group",
-                children: <JoinGroup />,
-                key: "2",
-              },
-            ]}
-          />
-       
+              key: "1",
+            },
+            {
+              label: "Join Group",
+              children: <JoinGroup />,
+              key: "2",
+            },
+          ]}
+        />
       </Card>
 
       <Modal
@@ -123,7 +121,7 @@ export default function Index({
 
       <Card title="Search" style={{ margin: "2em auto", maxWidth: "50rem" }}>
         <Search
-          placeholder="group name"
+          placeholder="Leave empty to find all the groups"
           enterButton="Search"
           size="large"
           onSearch={searchResultHandler}
@@ -220,7 +218,7 @@ const SavedUserInfo = ({
   };
 
   return (
-    <div style={{ margin: "2em auto" }}>
+    <div style={{ margin: "2em" }}>
       <div
         style={{
           display: "flex",
@@ -238,18 +236,17 @@ const SavedUserInfo = ({
             </span>
           </span>
         </Title>
-
-        <Button
-          shape="round"
-          icon={<LogoutOutlined />}
-          type="primary"
-          onClick={logoutHandler}
-        >
-          Logout
-        </Button>
+        <Tooltip title="Logout" placement="left">
+          <Button
+            shape="circle"
+            icon={<LogoutOutlined />}
+            type="primary"
+            onClick={logoutHandler}
+          />
+        </Tooltip>
       </div>
 
-      <Title level={3}>Groups You have joined -</Title>
+      <Title level={3}>Groups You have joined ~</Title>
       <div
         style={{
           display: "flex",

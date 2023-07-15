@@ -15,7 +15,7 @@ const SITE_CONFIG = {
     totalHardQuestion : 602,
     notificationHistoryAge: {
         amount:3,
-        unit:'hours' as ManipulateType
+        unit:'days' as ManipulateType
     }
     
 

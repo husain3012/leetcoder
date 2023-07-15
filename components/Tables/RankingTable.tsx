@@ -85,30 +85,30 @@ const RankingTable = ({
                 : {}
             }
           >
-            {!isMobile && (
-              <>
-                {r.leetcodeStats?.avatar ? (
-                  <Avatar src={r.leetcodeStats?.avatar} />
-                ) : (
-                  <Avatar>{r.name[0].toUpperCase()}</Avatar>
-                )}
-                <Divider type="vertical" />
-              </>
-            )}
-
             <Link
               href={`https://leetcode.com/${r.leetcodeUsername}`}
               target="_blank"
               rel="noreferrer"
+              style={{ margin: "auto" }}
             >
-              {r.leetcodeUsername}
+              {r.leetcodeStats?.avatar ? (
+                <Avatar src={r.leetcodeStats?.avatar} />
+              ) : (
+                <Avatar>{r.name[0].toUpperCase()}</Avatar>
+              )}
+
+              {!isMobile && (
+                <>
+                  <Divider type="vertical" /> {r.leetcodeUsername}
+                </>
+              )}
             </Link>
           </Space>
         </Tooltip>
       ),
-      width: "20%",
-
-      // sortDirections: ["ascend", "descend"],
+      width: isMobile?"10%":"20%",
+      align: isMobile ? "center" : "left",
+     
     },
     {
       title: "Contest Attended",
@@ -176,19 +176,17 @@ const RankingTable = ({
       sorter: (a, b) =>
         a.leetcodeStats ? getTotalSolved(a) - getTotalSolved(b) : null,
       render: (_, r) =>
-      getTotalSolved(r) ? (
+        getTotalSolved(r) ? (
           <Tooltip
             title={`${r.leetcodeStats.easySolved}E, ${r.leetcodeStats.mediumSolved}M, ${r.leetcodeStats.hardSolved}H`}
           >
             <Space>
-
-            {isMobile ? (
-              getTotalSolved(r)
-            ) : (
-              <QuestionSolvedPie leetcodeUser={r} />
-            )}
+              {isMobile ? (
+                getTotalSolved(r)
+              ) : (
+                <QuestionSolvedPie leetcodeUser={r} />
+              )}
             </Space>
-
           </Tooltip>
         ) : (
           <QuestionOutlined />
@@ -291,7 +289,7 @@ const QuestionSolvedPie = ({
       innerRadius={0.85}
       height={50}
       width={100}
-      pieStyle={{lineWidth:0}}
+      pieStyle={{ lineWidth: 0 }}
       interactions={[]}
       legend={false}
       label={false}
