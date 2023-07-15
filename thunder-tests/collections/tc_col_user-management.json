@@ -1,0 +1,87 @@
+{
+    "_id": "afd111b2-fc41-4594-8680-223aa29d6ceb",
+    "colName": "User Management",
+    "created": "2023-05-05T11:04:20.290Z",
+    "sortNum": 10000,
+    "folders": [],
+    "requests": [
+        {
+            "_id": "be4b08cf-6d12-413a-ab73-2ff7043d7a24",
+            "colId": "afd111b2-fc41-4594-8680-223aa29d6ceb",
+            "containerId": "",
+            "name": "Create Group",
+            "url": "{{host}}/api/groups/create",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2023-05-05T11:04:20.299Z",
+            "modified": "2023-05-07T22:18:12.441Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\":\"sgo2sda42\",\n  \"description\": \"A test group\",\n  \"createdByEmail\" :\"husainshahidrao@gmail.com\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "581c3b71-5509-430c-a16f-365e99ba46ef",
+            "colId": "afd111b2-fc41-4594-8680-223aa29d6ceb",
+            "containerId": "",
+            "name": "Join User",
+            "url": "{{host}}/api/groups/join/q3eTrBvZBq",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2023-05-05T11:04:29.409Z",
+            "modified": "2023-05-31T13:43:26.546Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\":\"hi-malik\",\n  \"leetcodeUsername\": \"hi-malik\",\n  \"email\" :\"hi-malik@gmail.com\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "4227ab72-ff3a-4871-a311-cd3c1c49a896",
+            "colId": "afd111b2-fc41-4594-8680-223aa29d6ceb",
+            "containerId": "",
+            "name": "Search Groups",
+            "url": "{{host}}/api/groups/search?name=",
+            "method": "GET",
+            "sortNum": 30000,
+            "created": "2023-05-05T11:17:17.680Z",
+            "modified": "2023-05-08T18:12:27.907Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "name",
+                    "value": "",
+                    "isPath": false
+                }
+            ],
+            "tests": []
+        },
+        {
+            "_id": "3364ed44-3d3f-4f1c-bb33-140b440c994b",
+            "colId": "afd111b2-fc41-4594-8680-223aa29d6ceb",
+            "containerId": "",
+            "name": "User Info",
+            "url": "{{host}}/api/groups/user?leetcodeUsername=ssadsad",
+            "method": "GET",
+            "sortNum": 40000,
+            "created": "2023-05-12T14:39:02.992Z",
+            "modified": "2023-05-12T15:06:15.618Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "leetcodeUsername",
+                    "value": "ssadsad",
+                    "isPath": false
+                }
+            ],
+            "tests": []
+        }
+    ]
+}

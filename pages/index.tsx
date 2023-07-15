@@ -17,6 +17,7 @@ import {
   Button,
   Tooltip,
   Modal,
+  Tabs,
 } from "antd";
 import JoinGroup from "../components/JoinGroup";
 import IGroup, { IGroupMember } from "../@types/group";
@@ -74,7 +75,7 @@ export default function Index({
 
   useEffect(() => {
     if (loggedUser) setSavedUser(loggedUser);
-    if(inviteID) setOpenModal(true)
+    if (inviteID) setOpenModal(true);
   }, [loggedUser, inviteID]);
 
   return (
@@ -86,28 +87,32 @@ export default function Index({
       )}
       <Divider>OR</Divider>
 
-      <div
-        style={{
-          display: "flex",
-          flexWrap: "wrap",
-          justifyContent: "space-evenly",
-          gap: 4,
-        }}
+      <Card
+        style={{ margin: "2em auto", width:"fit-content" }}
       >
-        <Card title="Create A Group" style={{ margin: "2em auto" }}>
-          <CreateGroup />
-        </Card>
+    
+          <Tabs
+          centered
+            type="card"
+            items={[
+              {
+                label: "Create Group",
+                children: <CreateGroup />,
 
-        <Card
-          id="join-group"
-          title="Join Existing Group"
-          style={{ margin: "2em auto" }}
-        >
-          <JoinGroup />
-        </Card>
-      </div>
+                key: "1",
+              },
+              {
+                label: "Join Group",
+                children: <JoinGroup />,
+                key: "2",
+              },
+            ]}
+          />
+       
+      </Card>
+
       <Modal
-        title="Join Group"
+        title="Join"
         footer={null}
         open={openModal}
         onCancel={() => setOpenModal(false)}
@@ -152,7 +157,10 @@ const LandingHero = ({ setSavedUser }: { setSavedUser: any }) => {
       }
       message.success(`Found ${loadUserString} `);
       setSavedUser(userInfo as IGroupMember);
-      setCookie("leetcode-user", loadUserString, {path:"/", maxAge:31536000});
+      setCookie("leetcode-user", loadUserString, {
+        path: "/",
+        maxAge: 31536000,
+      });
     } catch (error) {
       message.error(error.message);
     }
@@ -270,7 +278,9 @@ const GroupCard = ({ group }: { group: IGroup }) => {
       clearTimeout(copyTimeout);
       setCopied(false);
     }
-    await navigator.clipboard.writeText(`${window.origin}/groups/${group.urlSlug}`);
+    await navigator.clipboard.writeText(
+      `${window.origin}/groups/${group.urlSlug}`
+    );
     setCopied(true);
     copyTimeout = setTimeout(() => {
       setCopied(false);
@@ -325,11 +335,11 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
     };
   }
   const savedUserInfo = await getUserInfo(savedUser);
-  const serializedData  = {
+  const serializedData = {
     ...savedUserInfo,
     lastAccessed: savedUserInfo.lastAccessed.toISOString(),
     lastUpdated: savedUserInfo.lastUpdated.toISOString(),
-  }
+  };
 
   return {
     props: {

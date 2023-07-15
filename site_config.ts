@@ -1,3 +1,5 @@
+import { ManipulateType } from "dayjs";
+
 const SITE_CONFIG = {
 
     repoURL : "https://github.com/husain3012/leetcoder",
@@ -11,6 +13,10 @@ const SITE_CONFIG = {
     totalEasyQuestion : 683,
     totalMediumQuestion : 1442,
     totalHardQuestion : 602,
+    notificationHistoryAge: {
+        amount:3,
+        unit:'hours' as ManipulateType
+    }
     
 
 }

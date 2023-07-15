@@ -7,18 +7,28 @@ const rl = readline.createInterface({
   output: process.stdout
 });
 
-const outputFilePath = `DB__BACKUP__${new Date().toLocaleString()}`;
+const outputFilePathSchema = `SCHEMA__BACKUP__${new Date().toLocaleString()}`;
+const outputFilePathData = `DATA__BACKUP__${new Date().toLocaleString()}`;
 
 rl.question('Enter the PostgreSQL connection URI: ', (connectionUri) => {
   rl.close();
 
-  const command = `pg_dump ${connectionUri} -F p -f ${outputFilePath}`;
+  const commandSchema = `pg_dump ${connectionUri} -s ${outputFilePathSchema}`;
+  const commandData = `pg_dump ${connectionUri} -a ${outputFilePathData}`;
 
-  exec(command, (error, stdout, stderr) => {
+  exec(commandSchema, (error, stdout, stderr) => {
     if (error) {
-      console.error('Error dumping database:', error);
+      console.error('Error dumping Schema:', error);
     } else {
-      console.log(`Database dumped to ${outputFilePath}`);
+      console.log(`Database Schema dumped to ${outputFilePathSchema}`);
+    }
+  });
+
+  exec(commandData, (error, stdout, stderr) => {
+    if (error) {
+      console.error('Error dumping daa:', error);
+    } else {
+      console.log(`Database data dumped to ${outputFilePathData}`);
     }
   });
 });

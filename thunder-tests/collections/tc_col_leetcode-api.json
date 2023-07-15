@@ -1,0 +1,29 @@
+{
+    "_id": "a7de6250-7640-482b-a62f-8911bb4e7a5a",
+    "colName": "Leetcode API",
+    "created": "2023-05-05T11:58:50.052Z",
+    "sortNum": 20000,
+    "folders": [],
+    "requests": [
+        {
+            "_id": "918b76dc-7e7b-4ccc-b4d7-d8083e0af5bb",
+            "colId": "a7de6250-7640-482b-a62f-8911bb4e7a5a",
+            "containerId": "",
+            "name": "Leetcode Info",
+            "url": "{{host}}/api/leetcode?user=husain3012",
+            "method": "GET",
+            "sortNum": 10000,
+            "created": "2023-05-05T11:59:05.854Z",
+            "modified": "2023-05-25T11:56:53.320Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "user",
+                    "value": "husain3012",
+                    "isPath": false
+                }
+            ],
+            "tests": []
+        }
+    ]
+}

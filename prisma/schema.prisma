@@ -3,12 +3,50 @@ generator client {
 }
 
 datasource db {
-  provider          = "postgresql"
-  url               = env("POSTGRES_PRISMA_URL")
-  directUrl         = env("POSTGRES_URL_NON_POOLING")
-  shadowDatabaseUrl = env("POSTGRES_URL_NON_POOLING")
+  provider = "postgresql"
+  url      = env("POSTGRES_PRISMA_URL")
 }
 
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model Announcement {
+  id        BigInt                @id(map: "announcement_pkey") @default(autoincrement())
+  title     String
+  type      announcement_type     @default(INFO)
+  content   String?
+  createdOn DateTime              @db.Timestamptz(6)
+  priority  announcement_priority @default(LOW)
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model Group {
+  id             Int      @id @default(autoincrement())
+  name           String
+  description    String?
+  coverPhoto     String?
+  createdByEmail String
+  inviteID       String   @unique
+  lastAccessed   DateTime @default(now())
+  urlSlug        String   @unique
+  members        User[]   @relation("GroupToUser")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model LeetcodeInfo {
+  id               Int     @id @default(autoincrement())
+  avatar           String?
+  leetcodeUsername String  @unique
+  ranking          Int
+  streak           Int
+  easySolved       Int
+  mediumSolved     Int
+  hardSolved       Int
+  contestAttended  Int?
+  contestRanking   Int?
+  contestRating    Int?
+  User             User    @relation(fields: [leetcodeUsername], references: [leetcodeUsername])
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
 model User {
   id               Int           @id @default(autoincrement())
   email            String        @unique
@@ -21,30 +59,16 @@ model User {
   groups           Group[]       @relation("GroupToUser")
 }
 
-model Group {
-  id             Int      @id @default(autoincrement()) 
-  name           String   
-  description    String?
-  coverPhoto     String?
-  createdByEmail String
-  inviteID       String   @unique
-  lastAccessed   DateTime @default(now())
-  urlSlug        String   @unique
-  members        User[]   @relation("GroupToUser")
+enum announcement_priority {
+  LOW
+  MEDIUM
+  HIGH
+  VERY_HIGH
 }
 
-model LeetcodeInfo {
-  id               Int     @id @default(autoincrement())
-  avatar           String?
-  leetcodeUsername String  @unique
-  ranking          Int
-  streak           Int
-  easySolved       Int
-  mediumSolved     Int
-  hardSolved       Int
-  contestAttended  Int?
-  contestRating    Int?
-  contestRanking   Int?
-  username         User    @relation(fields: [leetcodeUsername], references: [leetcodeUsername])
+enum announcement_type {
+  SUCCESS
+  INFO
+  WARNING
+  ERROR
 }
-
