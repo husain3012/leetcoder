@@ -28,6 +28,7 @@ import { warmup_prisma } from "../../utils";
 import TruncatedText from "../common/TruncatedText";
 
 import dynamic from "next/dynamic";
+import stringToHslColor from "../../utils/strint_to_color";
 const Pie = dynamic(() => import("@ant-design/charts").then(({ Pie }) => Pie), {
   ssr: false,
 });
@@ -99,7 +100,7 @@ const RankingTable = ({
                   {r.leetcodeStats.avatar && r.leetcodeStats.avatar!=="https://s3-us-west-1.amazonaws.com/s3-lc-upload/assets/default_avatar.jpg" ? (
                     <Avatar src={r.leetcodeStats?.avatar} />
                   ) : (
-                    <Avatar>{r.name[0].toUpperCase()}</Avatar>
+                    <Avatar style={{backgroundColor:stringToHslColor(r.leetcodeUsername)}} >{r.name[0].toUpperCase()}</Avatar>
                   )}
 
                   <Divider type="vertical" />
