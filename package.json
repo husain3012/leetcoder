@@ -4,7 +4,8 @@
     "dev": "next",
     "build": "prisma generate && next build",
     "start": "next start",
-    "backup": "node scripts/backup.js"
+    "backup": "node scripts/backup.js",
+    "announce": "node scripts/announcement.js"
   },
   "dependencies": {
     "@ant-design/charts": "^1.4.2",

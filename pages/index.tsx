@@ -94,6 +94,7 @@ export default function Index({
           content={inviteInfo? inviteInfo.description:"Join or Create groups and compete with your LeetCode friends!"}
           key="desc"
         />
+        <meta property="og:image" content={inviteInfo.coverPhoto} />
       </Head>
 
 
