@@ -1,3 +1,5 @@
+import { Prisma } from "@prisma/client";
+
 interface IGroup {
   id?: number;
   name: string;
@@ -7,7 +9,7 @@ interface IGroup {
   members?: IGroupMember[];
   inviteID?: string;
   urlSlug: string;
-  _count?:{
+  _count?: {
     members: number;
   }
 }
@@ -31,4 +33,16 @@ export interface IGroupMember {
     avatar?: string;
   } | null;
   groups?: IGroup[]
+}
+
+
+export interface IInviteInfo {
+  id: string;
+  name: string;
+  coverPhoto: string;
+  createdByEmail: string;
+  description: string;
+  _count: Prisma.GroupCountOutputType;
+
+
 }

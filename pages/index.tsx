@@ -20,7 +20,7 @@ import {
   Tabs,
 } from "antd";
 import JoinGroup from "../components/JoinGroup";
-import IGroup, { IGroupMember } from "../@types/group";
+import IGroup, { IGroupMember, IInviteInfo } from "../@types/group";
 import GroupList from "../components/GroupList";
 import axios from "axios";
 
@@ -39,15 +39,18 @@ import { group } from "console";
 import { useCookies } from "react-cookie";
 import { GetServerSideProps } from "next";
 import { getUserInfo } from "../services/users/userInfo";
+import Head from "next/head";
+import { getInviteInfo } from "../services/groups/inviteInfo";
 
 const { Search } = Input;
 const { Text, Title } = Typography;
 const { Meta } = Card;
 
 export default function Index({
-  loggedUser,
+  loggedUser, inviteInfo
 }: {
   loggedUser: IGroupMember | null;
+  inviteInfo: IInviteInfo | null;
 }) {
   const router = useRouter();
   const { token } = theme.useToken();
@@ -82,6 +85,18 @@ export default function Index({
 
   return (
     <div>
+      <Head>
+        <title>
+         {inviteInfo? `${inviteInfo.name} | LeetCoder` :"LeetCoder"} 
+        </title>
+        <meta
+          name="description"
+          content={inviteInfo? inviteInfo.description:"Join or Create groups and compete with your LeetCode friends!"}
+          key="desc"
+        />
+      </Head>
+
+
       {savedUser ? (
         <SavedUserInfo savedUser={savedUser} setSavedUser={setSavedUser} />
       ) : (
@@ -322,12 +337,20 @@ const GroupCard = ({ group }: { group: IGroup }) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async ({ req }) => {
+export const getServerSideProps: GetServerSideProps = async ({ req , query}) => {
   const savedUser = req.cookies["leetcode-user"];
+  const inviteID = query.invite_id as string
+  let groupInfo = null
+  
+  if(inviteID){
+    groupInfo = await getInviteInfo(inviteID)
+
+  }
   if (!savedUser) {
     return {
       props: {
         loggedUser: null,
+        groupInfo,
       },
     };
   }
@@ -341,6 +364,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
   return {
     props: {
       loggedUser: serializedData,
+      groupInfo
     },
   };
 };

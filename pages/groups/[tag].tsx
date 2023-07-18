@@ -9,6 +9,7 @@ import { SmileFilled, UserOutlined } from "@ant-design/icons";
 import QuestionSolvedBar from "../../components/Charts/QuestionSolvedBar";
 import { getUserInfo } from "../../services/users/userInfo";
 import Link from "next/link";
+import Head from "next/head";
 
 const { Meta } = Card;
 
@@ -18,7 +19,18 @@ const Group = ({ groupStats, loggedUser }: { groupStats: IGroup , loggedUser:IGr
 
 
   return (
+    
     <div>
+         <Head>
+        <title>
+          {groupStats.name} | LeetCoder
+        </title>
+        <meta
+          name="description"
+          content={groupStats.description}
+          key="desc"
+        />
+      </Head>
       <Card
         style={{ margin: "2em" }}
         cover={
