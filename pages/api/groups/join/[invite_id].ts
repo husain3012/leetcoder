@@ -85,7 +85,7 @@ const postHandler = async (req: NextApiRequest, res: NextApiResponse) => {
       }
     });
 
-    return res.json(foundGroup);
+    return res.json(({...foundGroup, id:foundGroup.id.toString(), members:foundGroup.members.map(m=>({...m, id:m.id.toString()}))}));
   } catch (error) {
     res
       .status(error.status || 500)

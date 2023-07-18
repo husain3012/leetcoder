@@ -37,27 +37,27 @@ const QuestionSolvedBar = ({ groupStats }: { groupStats: IGroup }) => {
   groupStats.members.forEach((member) => {
     bar_graph_data.push({
       user: member.leetcodeUsername,
-      solved: member.leetcodeStats.hardSolved,
+      solved: member.leetcodeStats?.hardSolved || 0,
       type: "hard",
       color: "#FF375F",
     });
 
     bar_graph_data.push({
       user: member.leetcodeUsername,
-      solved: member.leetcodeStats.mediumSolved,
+      solved: member.leetcodeStats?.mediumSolved || 0,
       type: "medium",
       color: "#FFC01E",
     });
     bar_graph_data.push({
       user: member.leetcodeUsername,
-      solved: member.leetcodeStats.easySolved,
+      solved: member.leetcodeStats?.easySolved || 0,
       type: "easy",
       color: "#00B8A3",
       
     });
     line_graph_data.push({
       user: member.leetcodeUsername,
-      contestRating: member.leetcodeStats.contestRating,
+      contestRating: member.leetcodeStats?.contestRating,
 
     })
   });

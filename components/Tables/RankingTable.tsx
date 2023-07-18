@@ -97,7 +97,7 @@ const RankingTable = ({
             >
               {!isMobile && (
                 <>
-                  {r.leetcodeStats.avatar && r.leetcodeStats.avatar!=="https://s3-us-west-1.amazonaws.com/s3-lc-upload/assets/default_avatar.jpg" ? (
+                  {r.leetcodeStats?.avatar && r.leetcodeStats.avatar!=="https://s3-us-west-1.amazonaws.com/s3-lc-upload/assets/default_avatar.jpg" ? (
                     <Avatar src={r.leetcodeStats?.avatar} />
                   ) : (
                     <Avatar style={{backgroundColor:stringToHslColor(r.leetcodeUsername)}} >{r.name[0].toUpperCase()}</Avatar>
@@ -273,17 +273,17 @@ const QuestionSolvedPie = ({
   const data = [
     {
       type: "Easy",
-      value: leetcodeUser.leetcodeStats.easySolved,
+      value: leetcodeUser.leetcodeStats?.easySolved || 0,
       color: token.colorSuccess,
     },
     {
       type: "Medium",
-      value: leetcodeUser.leetcodeStats.mediumSolved,
+      value: leetcodeUser.leetcodeStats?.mediumSolved || 0,
       color: token.colorWarning,
     },
     {
       type: "Hard",
-      value: leetcodeUser.leetcodeStats.hardSolved,
+      value: leetcodeUser.leetcodeStats?.hardSolved || 0,
       color: token.colorError,
     },
   ];

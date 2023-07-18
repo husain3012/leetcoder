@@ -1,12 +1,11 @@
-import {initializeDB} from "../../db";
-
+import { initializeDB } from "../../db";
 
 const db = initializeDB();
 
 export const getGroupStatus = async (group_tag: string) => {
-  return await db.group.findUnique({
+  const group = await db.group.findUnique({
     where: {
-      urlSlug:group_tag
+      urlSlug: group_tag
     },
     select: {
       name: true,
@@ -27,9 +26,24 @@ export const getGroupStatus = async (group_tag: string) => {
         orderBy: {
           leetcodeStats: {
             ranking: "asc",
+
           },
         },
       },
     },
   });
+
+
+  const serialized = {
+    ...group,
+    id: group.id.toString(),
+    members: group.members.map(m => ({
+      ...m, id: m.id.toString(),
+      leetcodeStats: m.leetcodeStats?{ ...m.leetcodeStats, id: m.leetcodeStats.id.toString() } :null
+    }))
+
+
+  }
+
+  return serialized;
 };

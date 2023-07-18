@@ -3,7 +3,7 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "cockroachdb"
   url      = env("POSTGRES_PRISMA_URL")
 }
 
@@ -19,7 +19,7 @@ model Announcement {
 
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
 model Group {
-  id             Int      @id @default(autoincrement())
+  id             BigInt   @id @default(autoincrement())
   name           String
   description    String?
   coverPhoto     String?
@@ -27,12 +27,12 @@ model Group {
   inviteID       String   @unique
   lastAccessed   DateTime @default(now())
   urlSlug        String   @unique
-  members        User[]   @relation("GroupToUser")
+  members           User[]   @relation("GroupToUser")
 }
 
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
 model LeetcodeInfo {
-  id               Int     @id @default(autoincrement())
+  id               BigInt  @id @default(autoincrement())
   avatar           String?
   leetcodeUsername String  @unique
   ranking          Int
@@ -48,15 +48,15 @@ model LeetcodeInfo {
 
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
 model User {
-  id               Int           @id @default(autoincrement())
+  id               BigInt        @id @default(autoincrement())
   email            String        @unique
   name             String
   leetcodeUsername String        @unique
   lastAccessed     DateTime
   lastUpdated      DateTime
   failedRetries    Int           @default(0)
-  leetcodeStats    LeetcodeInfo?
-  groups           Group[]       @relation("GroupToUser")
+  leetcodeStats     LeetcodeInfo?
+  groups            Group[]       @relation("GroupToUser")
 }
 
 enum announcement_priority {

@@ -52,7 +52,7 @@ const JoinGroup = ({ inviteID }: { inviteID?: string }) => {
       );
 
       message.success(
-        `${values.leetcodeUsername}  joined group'${joinedGroup.data.name}'!`
+        `${values.leetcodeUsername}  joined group '${joinedGroup.data.name}'!`
       );
       setCookie("leetcode-user", values.leetcodeUsername, {path:"/", maxAge:31536000});
       router.replace(`/groups/${joinedGroup.data.urlSlug}`);

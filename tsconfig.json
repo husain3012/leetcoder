@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": ["dom", "dom.iterable", "esnext","esnext.bigint"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": false,
@@ -16,6 +16,6 @@
     "incremental": true,
     "outDir": "./",
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "prisma/seed.ts", "prisma/seed_data.js", "prisma/scripts/migrate-contest-ranking.js", "scripts/backup.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "prisma/seed.ts", "prisma/seed_data.js", "prisma/scripts/migrate-contest-ranking.js", "scripts/backup.js", "scripts/bigint.js"],
   "exclude": ["node_modules", "modules"]
 }

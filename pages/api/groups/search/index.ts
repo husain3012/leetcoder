@@ -24,7 +24,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 const getHandler = async (req: NextApiRequest, res: NextApiResponse) => {
   const query = req.query.name as string;
   const offset = (req.query.offset || 0) as number;
-  const testGroups = await db.group.findMany();
+
 
   try {
     const groups = await db.group.findMany({
@@ -47,7 +47,7 @@ const getHandler = async (req: NextApiRequest, res: NextApiResponse) => {
       },
      
     });
-    return res.send(groups);
+    return res.send(groups.map(g=>({...g, id: g.id.toString()})));
   } catch (error) {
     console.log(error);
     RequestError.response(req, res, error);
