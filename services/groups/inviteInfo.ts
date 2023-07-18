@@ -17,6 +17,8 @@ export const getInviteInfo = async (inviteID: string) => {
       _count:true
     },
   });
+  if(!group)
+   return null
 
 
   const serialized = {
