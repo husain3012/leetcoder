@@ -125,7 +125,7 @@ export default function Index({
       </Card>
 
       <Modal
-        title="Join"
+        title={`Join ${inviteInfo?.name || ""}`}
         footer={null}
         open={openModal}
         onCancel={() => setOpenModal(false)}
@@ -340,17 +340,18 @@ const GroupCard = ({ group }: { group: IGroup }) => {
 export const getServerSideProps: GetServerSideProps = async ({ req , query}) => {
   const savedUser = req.cookies["leetcode-user"];
   const inviteID = query.invite_id as string
-  let groupInfo = null
+  let inviteInfo = null
   
   if(inviteID){
-    groupInfo = await getInviteInfo(inviteID)
+    inviteInfo = await getInviteInfo(inviteID)
+    
 
   }
   if (!savedUser) {
     return {
       props: {
         loggedUser: null,
-        groupInfo,
+        inviteInfo,
       },
     };
   }
@@ -364,7 +365,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req , query}) => 
   return {
     props: {
       loggedUser: serializedData,
-      groupInfo
+      inviteInfo
     },
   };
 };
