@@ -24,6 +24,9 @@ import { IGroupMember } from "../../@types/group";
 import type { ColumnsType, TableProps } from "antd/es/table";
 import axios from "axios";
 import { warmup_prisma } from "../../utils";
+
+import TruncatedText from "../common/TruncatedText";
+
 import dynamic from "next/dynamic";
 const Pie = dynamic(() => import("@ant-design/charts").then(({ Pie }) => Pie), {
   ssr: false,
@@ -91,24 +94,28 @@ const RankingTable = ({
               rel="noreferrer"
               style={{ margin: "auto" }}
             >
-              {r.leetcodeStats?.avatar ? (
-                <Avatar src={r.leetcodeStats?.avatar} />
-              ) : (
-                <Avatar>{r.name[0].toUpperCase()}</Avatar>
-              )}
-
               {!isMobile && (
                 <>
-                  <Divider type="vertical" /> {r.leetcodeUsername}
+                  {r.leetcodeStats.avatar && r.leetcodeStats.avatar!=="https://s3-us-west-1.amazonaws.com/s3-lc-upload/assets/default_avatar.jpg" ? (
+                    <Avatar src={r.leetcodeStats?.avatar} />
+                  ) : (
+                    <Avatar>{r.name[0].toUpperCase()}</Avatar>
+                  )}
+
+                  <Divider type="vertical" />
                 </>
               )}
+
+              <TruncatedText
+                isMobile={isMobile}
+                str={r.leetcodeUsername}
+                n={10}
+              />
             </Link>
           </Space>
         </Tooltip>
       ),
-      width: isMobile?"10%":"20%",
-      align: isMobile ? "center" : "left",
-     
+      width: isMobile ? "10%" : "20%",
     },
     {
       title: "Contest Attended",
