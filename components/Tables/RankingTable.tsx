@@ -140,11 +140,7 @@ const RankingTable = ({
       dataIndex: "contestRating",
 
       sorter: (a, b) =>
-        a.leetcodeStats?.contestRating == 0
-          ? 1
-          : b.leetcodeStats?.contestRating == 0
-          ? -1
-          : a.leetcodeStats?.contestRating - b.leetcodeStats?.contestRating,
+        Number(a.leetcodeStats?.contestRating) - Number(b.leetcodeStats?.contestRating),
       render: (v, r) =>
         r.leetcodeStats?.contestRating ? (
           r.leetcodeStats?.contestRating
